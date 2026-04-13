@@ -3,11 +3,23 @@ export const WHATSAPP_PHONE = "919999999999";
 
 export const CONTACT_EMAIL = "wattamwarsejal@gmail.com";
 
-/** Base URL of sejal-api (no trailing slash). Set in .env — see .env.development */
+/**
+ * Contact POST URL. Order:
+ * 1) REACT_APP_API_URL (build-time) — separate sejal-api deploy
+ * 2) Production: same origin /api/contact — Vercel serverless `api/contact.js`
+ */
 export function getContactApiUrl() {
-  const base = (process.env.REACT_APP_API_URL || "").replace(/\/$/, "");
-  if (!base) return null;
-  return `${base}/api/contact`;
+  const explicit = (process.env.REACT_APP_API_URL || "").replace(/\/$/, "");
+  if (explicit) return `${explicit}/api/contact`;
+
+  if (process.env.NODE_ENV === "production") {
+    if (typeof window !== "undefined" && window.location?.origin) {
+      return `${window.location.origin}/api/contact`;
+    }
+    return "/api/contact";
+  }
+
+  return null;
 }
 
 export function getWhatsAppUrl() {
