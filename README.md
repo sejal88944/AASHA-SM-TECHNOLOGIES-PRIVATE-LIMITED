@@ -51,3 +51,4 @@ npm run build
 - **Logo:** replace `public/logo.png`.
 - **Contact → MongoDB:** `REACT_APP_API_URL` must point at the server that exposes `POST /api/contact` (`sejal-api`).
 # SM-Tech-Solutions-Pvt-Ltd
+# SM-Tech-Solutions-Pvt-Ltd
