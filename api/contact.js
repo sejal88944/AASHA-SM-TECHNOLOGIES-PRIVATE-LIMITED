@@ -1,6 +1,6 @@
 /**
  * Vercel serverless: POST /api/contact — same contract as sejal-api.
- * Set MONGODB_URI (and optional MONGODB_DB_NAME, MONGODB_CONTACTS_COLLECTION) in Vercel project env.
+ * Set MONGODB_URI in Vercel → Environment Variables (Production).
  */
 const mongoose = require("mongoose");
 
@@ -42,10 +42,10 @@ async function connect() {
     throw err;
   }
 
-  if (!global._mongooseContactCache) {
-    global._mongooseContactCache = { conn: null, promise: null };
+  if (!globalThis._mongooseContactCache) {
+    globalThis._mongooseContactCache = { conn: null, promise: null };
   }
-  const cache = global._mongooseContactCache;
+  const cache = globalThis._mongooseContactCache;
 
   if (cache.conn) return cache.conn;
 
@@ -98,7 +98,7 @@ module.exports = async function handler(req, res) {
     if (code === 500 && err.message?.includes("MONGODB_URI")) {
       return res.status(500).json({
         message:
-          "Database URL is missing on the server. In Vercel: Project → Settings → Environment Variables → add MONGODB_URI (same value as Atlas), tick Production (and Preview if you test preview URLs), Save, then Redeploy. Name must be exactly MONGODB_URI or MONGO_URL.",
+          "Database is not configured. In Vercel add MONGODB_URI (MongoDB Atlas) and redeploy.",
       });
     }
     return res.status(500).json({

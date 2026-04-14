@@ -11,9 +11,8 @@ export function Footer() {
               <Logo className="h-10 w-auto max-h-12 max-w-[180px] object-contain sm:h-11" />
             </Link>
             <p className="mt-3 text-sm leading-relaxed text-slate-600">
-              An IT startup delivering smart digital solutions—websites, apps,
-              and automation—for businesses that want to grow with clarity and
-              confidence.
+              SM Tech Solutions Private Limited — websites, apps, automation, bulk SMS,
+              and WhatsApp marketing for businesses across India.
             </p>
           </div>
           <div>
@@ -51,7 +50,7 @@ export function Footer() {
             <p className="mt-3 text-sm text-slate-600">
               Email:{' '}
               <a
-                href="mailto:wattamwarsejal@gmail.com"
+                href="mailto:adminsmtechsolution@gmail.com"
                 className="font-medium text-brand-700 hover:underline"
               >
                 adminsmtechsolution@gmail.com
