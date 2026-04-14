@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
-import { CONTACT_EMAIL } from "../config";
+import { CONTACT_EMAIL, OFFICE_ADDRESS, OFFICE_MAPS_URL } from "../config";
 import { services } from "../data/services";
 
 export default function Footer() {
@@ -18,8 +18,16 @@ export default function Footer() {
             Smart digital solutions for modern businesses in Pune and across India - websites,
             automation, bulk SMS, and WhatsApp marketing.
           </p>
-          <p className="mt-3 text-sm text-slate-600">
-            Pune, Maharashtra, India
+          <p className="mt-3 text-sm text-slate-600">{OFFICE_ADDRESS}</p>
+          <p className="mt-2 text-sm">
+            <a
+              href={OFFICE_MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-brand hover:underline"
+            >
+              Open in Maps
+            </a>
           </p>
         </div>
 
@@ -66,8 +74,8 @@ export default function Footer() {
       </div>
       <div className="mx-auto max-w-6xl px-4 pb-8 sm:px-6">
         <iframe
-          title="SM Tech Solutions Pune Location"
-          src="https://www.google.com/maps?q=Pune%2C%20Maharashtra%2C%20India&output=embed"
+          title="SM Tech Solutions — Nanded area (431717)"
+          src="https://www.google.com/maps?q=Nanded%2C%20Maharashtra%20431717&output=embed"
           className="h-52 w-full rounded-xl border border-slate-200"
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"

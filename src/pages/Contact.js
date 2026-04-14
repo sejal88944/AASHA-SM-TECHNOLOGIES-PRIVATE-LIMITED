@@ -1,5 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
-import { CONTACT_EMAIL, getContactApiUrl } from "../config";
+import {
+  CONTACT_EMAIL,
+  getContactApiUrl,
+  OFFICE_ADDRESS,
+  OFFICE_MAPS_URL,
+} from "../config";
 import Seo from "../components/Seo";
 
 const initial = { name: "", phone: "", email: "", message: "" };
@@ -67,6 +72,8 @@ export default function Contact() {
           phone: values.phone.trim(),
           email: values.email.trim(),
           message: values.message.trim(),
+          officeAddress: OFFICE_ADDRESS,
+          mapsUrl: OFFICE_MAPS_URL,
         }),
       });
       const data = await res.json().catch(() => ({}));

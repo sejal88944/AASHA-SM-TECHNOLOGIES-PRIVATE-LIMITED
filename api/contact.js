@@ -8,11 +8,19 @@ const contactSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     phone: { type: String, required: true },
-    email: { type: String, required: true },
+    email: { type: String, default: "" },
     message: { type: String, required: true },
+    officeAddress: { type: String, default: "" },
+    mapsUrl: { type: String, default: "" },
   },
   { timestamps: true }
 );
+
+const DEFAULT_OFFICE_ADDRESS =
+  process.env.OFFICE_ADDRESS?.trim() || "Nanded Dist., Maharashtra 431717";
+const DEFAULT_MAPS_URL =
+  process.env.OFFICE_MAPS_URL?.trim() ||
+  "https://www.google.com/maps/search/?api=1&query=Nanded%2C%20Maharashtra%20431717";
 
 const CONTACTS_COLLECTION =
   process.env.MONGODB_CONTACTS_COLLECTION || "sejal_contacts";
@@ -63,16 +71,21 @@ module.exports = async function handler(req, res) {
       mongoose.models.Contact ||
       mongoose.model("Contact", contactSchema, CONTACTS_COLLECTION);
 
-    const { name, phone, email, message } = req.body || {};
-    if (!name?.trim() || !phone?.trim() || !email?.trim() || !message?.trim()) {
-      return res.status(400).json({ message: "All fields are required." });
+    const { name, phone, email, message, officeAddress, mapsUrl } = req.body || {};
+    if (!name?.trim() || !phone?.trim() || !message?.trim()) {
+      return res.status(400).json({
+        message: "Name, phone, and message are required.",
+      });
     }
 
     await Contact.create({
       name: name.trim(),
       phone: String(phone).replace(/\D/g, ""),
-      email: email.trim(),
+      email: (email && String(email).trim()) || "",
       message: message.trim(),
+      officeAddress:
+        (officeAddress && String(officeAddress).trim()) || DEFAULT_OFFICE_ADDRESS,
+      mapsUrl: (mapsUrl && String(mapsUrl).trim()) || DEFAULT_MAPS_URL,
     });
 
     return res.status(200).json({

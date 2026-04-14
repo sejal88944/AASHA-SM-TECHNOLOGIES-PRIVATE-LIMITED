@@ -3,6 +3,13 @@ export const WHATSAPP_PHONE = "8446218623";
 
 export const CONTACT_EMAIL = "adminsmtechsolution@gmail.com";
 
+/** Office location (shown on site + saved on each Atlas contact for Maps reference). */
+export const OFFICE_ADDRESS = "Nanded Dist., Maharashtra 431717";
+
+/** Google Maps search for the office area (PIN 431717). */
+export const OFFICE_MAPS_URL =
+  "https://www.google.com/maps/search/?api=1&query=Nanded%2C%20Maharashtra%20431717";
+
 const DEFAULT_DEV_API = "http://localhost:4000";
 
 /**

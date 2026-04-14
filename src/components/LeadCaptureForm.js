@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { getContactApiUrl } from "../config";
+import { getContactApiUrl, OFFICE_ADDRESS, OFFICE_MAPS_URL } from "../config";
 
 const initial = { name: "", phone: "", service: "Bulk SMS Service", message: "" };
 
@@ -45,6 +45,8 @@ export default function LeadCaptureForm({ title = "Get a free demo", compact = f
           phone: values.phone.trim(),
           email: "",
           message: `Service: ${values.service}\n${values.message.trim()}`,
+          officeAddress: OFFICE_ADDRESS,
+          mapsUrl: OFFICE_MAPS_URL,
         }),
       });
       const data = await res.json().catch(() => ({}));
@@ -54,7 +56,7 @@ export default function LeadCaptureForm({ title = "Get a free demo", compact = f
       }
       setValues(initial);
       setSubmitted(false);
-      setSuccess("Thank you. Our Pune team will call you soon.");
+      setSuccess("Thank you. Our team will call you soon.");
     } catch {
       setServerError("Unable to connect right now. Please try again in a moment.");
     } finally {
@@ -68,6 +70,17 @@ export default function LeadCaptureForm({ title = "Get a free demo", compact = f
       <p className="mt-2 text-sm text-slate-600">
         Affordable pricing, no setup cost, and easy-to-use campaigns for small businesses in
         India.
+      </p>
+      <p className="mt-2 text-sm text-slate-700">
+        <span className="font-medium">Office:</span> {OFFICE_ADDRESS}{" "}
+        <a
+          href={OFFICE_MAPS_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="ml-1 font-semibold text-brand hover:underline"
+        >
+          Open in Maps
+        </a>
       </p>
       <form onSubmit={onSubmit} className="mt-6 grid gap-4 sm:grid-cols-2" noValidate>
         <div>
