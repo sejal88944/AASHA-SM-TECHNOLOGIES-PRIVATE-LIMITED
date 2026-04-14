@@ -2,3 +2,9 @@ User-agent: *
 Allow: /
 
 Sitemap: https://smtechsolutions.in/sitemap.xml
+<<<<<<< HEAD
+=======
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Disallow:
+>>>>>>> 6ad3737da72a8b8fb38e5e7a7796410366c6b090

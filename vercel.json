@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "headers": [
     {
       "source": "/sitemap.xml",
@@ -21,6 +22,12 @@
           "value": "text/plain; charset=utf-8"
         }
       ]
+=======
+  "rewrites": [
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
+>>>>>>> 6ad3737da72a8b8fb38e5e7a7796410366c6b090
     }
   ]
 }

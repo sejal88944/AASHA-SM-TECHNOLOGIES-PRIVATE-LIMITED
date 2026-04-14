@@ -1,10 +1,16 @@
 /** @type {import('tailwindcss').Config} */
+<<<<<<< HEAD
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+=======
+module.exports = {
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+>>>>>>> 6ad3737da72a8b8fb38e5e7a7796410366c6b090
   theme: {
     extend: {
       colors: {
         brand: {
+<<<<<<< HEAD
           50: '#eff8ff',
           100: '#dbeafe',
           200: '#bfdbfe',
@@ -35,3 +41,14 @@ export default {
   },
   plugins: [],
 }
+=======
+          DEFAULT: "#1e40af",
+          dark: "#1e3a8a",
+          light: "#3b82f6",
+        },
+      },
+    },
+  },
+  plugins: [],
+};
+>>>>>>> 6ad3737da72a8b8fb38e5e7a7796410366c6b090
