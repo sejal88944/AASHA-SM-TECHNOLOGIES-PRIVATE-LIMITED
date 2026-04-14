@@ -1,0 +1,70 @@
+import { Link } from 'react-router-dom'
+
+export function Footer() {
+  return (
+    <footer className="border-t border-brand-100 bg-slate-50">
+      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="grid gap-10 md:grid-cols-3">
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-700 text-sm font-bold text-white">
+                S
+              </span>
+              <span className="text-lg font-bold text-slate-900">Sejal</span>
+            </div>
+            <p className="mt-3 text-sm leading-relaxed text-slate-600">
+              An IT startup delivering smart digital solutions—websites, apps,
+              and automation—for businesses that want to grow with clarity and
+              confidence.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-900">
+              Quick links
+            </h3>
+            <ul className="mt-3 space-y-2 text-sm">
+              <li>
+                <Link to="/" className="text-slate-600 hover:text-brand-700">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/services"
+                  className="text-slate-600 hover:text-brand-700"
+                >
+                  Services
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/contact"
+                  className="text-slate-600 hover:text-brand-700"
+                >
+                  Contact
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-900">
+              Contact
+            </h3>
+            <p className="mt-3 text-sm text-slate-600">
+              Email:{' '}
+              <a
+                href="mailto:wattamwarsejal@gmail.com"
+                className="font-medium text-brand-700 hover:underline"
+              >
+                adminsmtechsolution@gmail.com
+              </a>
+            </p>
+            <p className="mt-2 text-xs text-slate-500">
+              © {new Date().getFullYear()} Sejal. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}
