@@ -1,12 +1,15 @@
 /** Replace with your WhatsApp number: country code + digits only (e.g. 91 + 10 digits). */
-export const WHATSAPP_PHONE = "919999999999";
+export const WHATSAPP_PHONE = "8446218623";
 
-export const CONTACT_EMAIL = "wattamwarsejal@gmail.com";
+export const CONTACT_EMAIL = "adminsmtechsolution@gmail.com";
+
+const DEFAULT_DEV_API = "http://localhost:4000";
 
 /**
  * Contact POST URL. Order:
- * 1) REACT_APP_API_URL (build-time) — separate sejal-api deploy
+ * 1) REACT_APP_API_URL (from .env / Vercel / Render build env)
  * 2) Production: same origin /api/contact — Vercel serverless `api/contact.js`
+ * 3) Development fallback: sejal-api on port 4000
  */
 export function getContactApiUrl() {
   const explicit = (process.env.REACT_APP_API_URL || "").replace(/\/$/, "");
@@ -19,7 +22,8 @@ export function getContactApiUrl() {
     return "/api/contact";
   }
 
-  return null;
+  const devBase = DEFAULT_DEV_API.replace(/\/$/, "");
+  return `${devBase}/api/contact`;
 }
 
 export function getWhatsAppUrl() {

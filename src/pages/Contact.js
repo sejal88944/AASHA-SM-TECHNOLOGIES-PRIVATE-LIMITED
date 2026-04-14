@@ -1,5 +1,6 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { CONTACT_EMAIL, getContactApiUrl } from "../config";
+import Seo from "../components/Seo";
 
 const initial = { name: "", phone: "", email: "", message: "" };
 
@@ -27,6 +28,13 @@ export default function Contact() {
 
   const errors = useMemo(() => validate(values), [values]);
 
+  useEffect(() => {
+    if (process.env.NODE_ENV === "development") {
+      // eslint-disable-next-line no-console -- verify API target while developing
+      console.log("Contact API URL:", getContactApiUrl());
+    }
+  }, []);
+
   const showError = (field) =>
     (touched[field] || submitted) && errors[field];
 
@@ -48,12 +56,6 @@ export default function Contact() {
     if (Object.keys(v).length > 0) return;
 
     const url = getContactApiUrl();
-    if (!url) {
-      setServerError(
-        "Server address is not configured. Set REACT_APP_API_URL in .env (see README)."
-      );
-      return;
-    }
 
     setSaving(true);
     try {
@@ -87,10 +89,16 @@ export default function Contact() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:py-20">
+      <Seo
+        title="Contact SM Tech Solutions Pune | Bulk SMS & Website Leads"
+        description="Contact SM Tech Solutions for bulk sms service india, whatsapp marketing india, and website development in Pune. Get a free demo today."
+        canonicalPath="/contact"
+      />
       <header className="text-center">
-        <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl">Contact</h1>
+        <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl">Contact Our Pune Team</h1>
         <p className="mt-4 text-slate-600">
-          Share a few details and we’ll respond shortly. You can also email us directly at{" "}
+          Share a few details for bulk SMS, WhatsApp marketing, or website development. You can
+          also email us directly at{" "}
           <a
             href={`mailto:${CONTACT_EMAIL}`}
             className="font-medium text-brand hover:underline"
@@ -191,13 +199,21 @@ export default function Contact() {
           )}
         </div>
 
-        <button
-          type="submit"
-          disabled={saving}
-          className="w-full rounded-lg bg-brand py-3 text-sm font-semibold text-white shadow hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand/40 disabled:opacity-60 sm:w-auto sm:px-8"
-        >
-          {saving ? "Sending…" : "Send message"}
-        </button>
+        <div className="flex flex-wrap items-center gap-3">
+          <button
+            type="submit"
+            disabled={saving}
+            className="w-full rounded-lg bg-brand py-3 text-sm font-semibold text-white shadow hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand/40 disabled:opacity-60 sm:w-auto sm:px-8"
+          >
+            {saving ? "Sending..." : "Contact Now"}
+          </button>
+          <a
+            href="/services"
+            className="rounded-lg border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+          >
+            View Services
+          </a>
+        </div>
       </form>
     </div>
   );

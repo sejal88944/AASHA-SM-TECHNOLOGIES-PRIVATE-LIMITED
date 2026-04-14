@@ -1,6 +1,6 @@
 export const services = [
   {
-    title: "Website Development",
+    title: "Website Development Company India",
     points: [
       "Build strong online presence",
       "Attract more customers",
@@ -30,7 +30,7 @@ export const services = [
       "Native and cross-platform apps focused on usability, performance, and growth.",
   },
   {
-    title: "WhatsApp API",
+    title: "WhatsApp Marketing India",
     points: [
       "Automate communication",
       "Send updates instantly",
@@ -50,7 +50,7 @@ export const services = [
       "Secure payment integrations with trusted gateways and smooth checkout flows.",
   },
   {
-    title: "SMS Automation",
+    title: "Bulk SMS Service India",
     points: [
       "Send bulk messages",
       "Share offers instantly",

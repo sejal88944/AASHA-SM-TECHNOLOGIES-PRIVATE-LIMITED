@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
+import Seo from "../components/Seo";
 import { services } from "../data/services";
 
 const steps = ["Requirement", "Planning", "Development", "Testing", "Delivery"];
@@ -7,11 +8,18 @@ const steps = ["Requirement", "Planning", "Development", "Testing", "Delivery"];
 export default function Services() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:py-20">
+      <Seo
+        title="Bulk SMS Service in Pune | WhatsApp Marketing India Services"
+        description="Explore bulk sms service in pune, cheap sms marketing india plans, WhatsApp marketing, and website development services for small businesses."
+        canonicalPath="/services"
+      />
       <header className="max-w-3xl">
-        <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl">Services</h1>
+        <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl">
+          Services for Small Business Growth in Pune and India
+        </h1>
         <p className="mt-4 text-lg text-slate-600">
-          We design and ship digital solutions that match how your business actually works—not
-          generic templates—so teams stay productive and customers get a polished experience.
+          We provide bulk sms service india solutions, local campaign support in Pune, WhatsApp
+          automation, and website development services that convert visitors into leads.
         </p>
       </header>
 
@@ -59,12 +67,20 @@ export default function Services() {
           ))}
         </div>
         <div className="mt-10 text-center">
-          <Link
-            to="/contact"
-            className="inline-flex rounded-lg bg-brand px-6 py-3 text-sm font-semibold text-white hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand/40"
-          >
-            Start a project
-          </Link>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <Link
+              to="/contact"
+              className="inline-flex rounded-lg bg-brand px-6 py-3 text-sm font-semibold text-white hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand/40"
+            >
+              Free Demo
+            </Link>
+            <Link
+              to="/blog"
+              className="inline-flex rounded-lg border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+            >
+              Learn from Blog
+            </Link>
+          </div>
         </div>
       </section>
     </div>

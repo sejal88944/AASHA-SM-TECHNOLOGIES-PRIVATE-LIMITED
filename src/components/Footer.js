@@ -15,7 +15,11 @@ export default function Footer() {
             </span>
           </Link>
           <p className="mt-4 text-sm leading-relaxed text-slate-600">
-            Smart digital solutions for modern businesses—websites, apps, and automation.
+            Smart digital solutions for modern businesses in Pune and across India - websites,
+            automation, bulk SMS, and WhatsApp marketing.
+          </p>
+          <p className="mt-3 text-sm text-slate-600">
+            Pune, Maharashtra, India
           </p>
         </div>
 
@@ -52,8 +56,22 @@ export default function Footer() {
                 Send a message
               </Link>
             </li>
+              <li>
+                <Link to="/blog" className="hover:text-brand transition-colors">
+                  SEO Blog
+                </Link>
+              </li>
           </ul>
         </div>
+      </div>
+      <div className="mx-auto max-w-6xl px-4 pb-8 sm:px-6">
+        <iframe
+          title="SM Tech Solutions Pune Location"
+          src="https://www.google.com/maps?q=Pune%2C%20Maharashtra%2C%20India&output=embed"
+          className="h-52 w-full rounded-xl border border-slate-200"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
       </div>
       <div className="border-t border-slate-200 bg-slate-100/80 py-4 text-center text-xs text-slate-500">
         © {new Date().getFullYear()} SM Tech Solutions Pvt Ltd. All rights reserved.
