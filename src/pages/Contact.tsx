@@ -44,7 +44,9 @@ export function Contact() {
                   <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
                     Company
                   </p>
-                  <p className="mt-1 text-slate-800">Sejal — IT solutions</p>
+                  <p className="mt-1 text-slate-800">
+                    SM Tech Solutions Private Limited
+                  </p>
                 </div>
               </div>
             </aside>

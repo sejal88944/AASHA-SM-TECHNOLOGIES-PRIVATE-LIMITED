@@ -35,10 +35,7 @@ export function Home() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-radial from-brand-200/30 via-transparent to-transparent" />
         <div className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
           <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-wide text-brand-700">
-              Sejal — IT solutions
-            </p>
-            <h1 className="mt-3 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
+            <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
               Smart Digital Solutions for Modern Businesses
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-slate-600 sm:text-xl">
@@ -62,7 +59,7 @@ export function Home() {
                 A modern approach to delivery
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-slate-600">
-                Sejal is an IT startup built around clarity, speed, and outcomes.
+                SM Tech Solutions Private Limited is built around clarity, speed, and outcomes.
                 We combine thoughtful design with dependable engineering so your
                 digital presence works as hard as your team does.
               </p>
@@ -115,7 +112,7 @@ export function Home() {
       <section className="border-t border-b border-brand-100 bg-white py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow="Why Sejal"
+            eyebrow="Why us"
             title="Why choose us"
             subtitle="We build for longevity—not just launch day."
           />

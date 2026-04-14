@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { Logo } from './Logo'
 
 export function Footer() {
   return (
@@ -6,12 +7,9 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-3">
           <div>
-            <div className="flex items-center gap-2">
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-700 text-sm font-bold text-white">
-                S
-              </span>
-              <span className="text-lg font-bold text-slate-900">Sejal</span>
-            </div>
+            <Link to="/" className="inline-block">
+              <Logo className="h-10 w-auto max-h-12 max-w-[180px] object-contain sm:h-11" />
+            </Link>
             <p className="mt-3 text-sm leading-relaxed text-slate-600">
               An IT startup delivering smart digital solutions—websites, apps,
               and automation—for businesses that want to grow with clarity and
@@ -60,7 +58,7 @@ export function Footer() {
               </a>
             </p>
             <p className="mt-2 text-xs text-slate-500">
-              © {new Date().getFullYear()} Sejal. All rights reserved.
+              © {new Date().getFullYear()} SM Tech Solutions Private Limited. All rights reserved.
             </p>
           </div>
         </div>

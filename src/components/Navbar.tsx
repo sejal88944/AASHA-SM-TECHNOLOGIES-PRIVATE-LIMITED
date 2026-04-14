@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { Logo } from './Logo'
 
 const linkClass = ({ isActive }: { isActive: boolean }) =>
   `rounded-md px-3 py-2 text-sm font-medium transition ${
@@ -14,13 +15,12 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-brand-100/80 bg-white/90 backdrop-blur-md">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        <NavLink to="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-brand-600 to-brand-800 text-sm font-bold text-white shadow-soft">
-            S
-          </span>
-          <span className="text-lg font-bold tracking-tight text-slate-900">
-            Sejal
-          </span>
+        <NavLink
+          to="/"
+          className="flex items-center gap-2 py-0.5"
+          onClick={() => setOpen(false)}
+        >
+          <Logo className="h-9 w-auto max-h-10 max-w-[140px] object-contain sm:h-10 sm:max-h-11 sm:max-w-[160px]" />
         </NavLink>
 
         <div className="hidden items-center gap-1 md:flex">
