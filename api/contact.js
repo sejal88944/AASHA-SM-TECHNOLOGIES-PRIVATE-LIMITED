@@ -17,8 +17,17 @@ const contactSchema = new mongoose.Schema(
 const CONTACTS_COLLECTION =
   process.env.MONGODB_CONTACTS_COLLECTION || "sejal_contacts";
 
+function getMongoUri() {
+  return (
+    process.env.MONGODB_URI?.trim() ||
+    process.env.MONGO_URL?.trim() ||
+    process.env.MONGO_URI?.trim() ||
+    ""
+  );
+}
+
 async function connect() {
-  const uri = process.env.MONGODB_URI?.trim();
+  const uri = getMongoUri();
   if (!uri) {
     const err = new Error("MONGODB_URI is not configured");
     err.statusCode = 500;
@@ -75,7 +84,8 @@ module.exports = async function handler(req, res) {
     const code = err.statusCode || 500;
     if (code === 500 && err.message?.includes("MONGODB_URI")) {
       return res.status(500).json({
-        message: "Server is not configured. Add MONGODB_URI in Vercel env.",
+        message:
+          "Database URL is missing on the server. In Vercel: Project → Settings → Environment Variables → add MONGODB_URI (same value as Atlas), tick Production (and Preview if you test preview URLs), Save, then Redeploy. Name must be exactly MONGODB_URI or MONGO_URL.",
       });
     }
     return res.status(500).json({
