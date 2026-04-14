@@ -2,62 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://smtechsolutions.in/</loc>
-<<<<<<< HEAD
     <lastmod>2026-04-15</lastmod>
-=======
->>>>>>> 6ad3737da72a8b8fb38e5e7a7796410366c6b090
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://smtechsolutions.in/services</loc>
-<<<<<<< HEAD
     <lastmod>2026-04-15</lastmod>
-=======
->>>>>>> 6ad3737da72a8b8fb38e5e7a7796410366c6b090
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://smtechsolutions.in/contact</loc>
-<<<<<<< HEAD
     <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-=======
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://smtechsolutions.in/blog</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smtechsolutions.in/blog/bulk-sms-service-india-small-business-guide</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://smtechsolutions.in/blog/bulk-sms-service-in-pune-local-growth-playbook</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://smtechsolutions.in/blog/cheap-sms-marketing-india-without-quality-loss</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://smtechsolutions.in/blog/whatsapp-marketing-india-for-customer-conversions</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://smtechsolutions.in/blog/website-development-company-india-smb-checklist</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
->>>>>>> 6ad3737da72a8b8fb38e5e7a7796410366c6b090
 </urlset>
