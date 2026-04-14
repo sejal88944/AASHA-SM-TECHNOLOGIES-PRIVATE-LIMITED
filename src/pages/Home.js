@@ -88,13 +88,14 @@ export default function Home() {
             </div>
             <div className="flex flex-wrap items-center justify-center gap-3 md:justify-start">
               <Link
-                to="/contact"
+                to="/#site-lead-form"
                 className="rounded-lg bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand/40"
               >
                 Free Demo
               </Link>
               <Link
-                to="/services"
+                to="/#site-lead-form"
+                onClick={() => sessionStorage.setItem("smtech-lead-form-only", "1")}
                 className="rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-800 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-300"
               >
                 Contact Now

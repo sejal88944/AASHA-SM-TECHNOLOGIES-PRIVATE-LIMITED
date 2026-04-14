@@ -52,9 +52,6 @@ export default function Navbar() {
           <NavLink to="/blog" className={linkClass} onClick={() => setOpen(false)}>
             Blog
           </NavLink>
-          <NavLink to="/contact" className={linkClass} onClick={() => setOpen(false)}>
-            Contact
-          </NavLink>
         </div>
       </nav>
     </header>
