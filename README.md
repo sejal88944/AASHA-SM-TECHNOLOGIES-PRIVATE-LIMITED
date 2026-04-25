@@ -26,3 +26,4 @@ Optional: connect **`../sejal-api`** for `POST /api/contact`. See `.env.example`
 - **Framework preset:** Vite  
 - **Build command:** `npm run build`  
 - **Output directory:** `dist`  
+# AASHA-SM-TECHNOLOGIES-PRIVATE-LIMITED
