@@ -1,0 +1,5 @@
+{
+  "name": "aasha-sm-monorepo",
+  "private": true,
+  "description": "Vercel: Root Directory blank (repo root). Build runs in frontend/ per vercel.json."
+}

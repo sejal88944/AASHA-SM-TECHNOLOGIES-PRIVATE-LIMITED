@@ -1,0 +1,6 @@
+{
+  "type": "commonjs",
+  "dependencies": {
+    "mongoose": "^8.8.0"
+  }
+}
