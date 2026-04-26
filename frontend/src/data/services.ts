@@ -1,74 +1,91 @@
+export type ServiceIconId =
+  | 'web'
+  | 'crm'
+  | 'mobile'
+  | 'whatsapp'
+  | 'payment'
+  | 'sms'
+  | 'maps'
+
 export type ServiceItem = {
   title: string
   /** One-line summary for home service cards */
   short: string
   /** Bullet points for the Services page */
   points: string[]
+  icon: ServiceIconId
 }
 
 export const services: ServiceItem[] = [
   {
-    title: '💻 Website Development (Static & Dynamic)',
+    title: 'Website Development (Static & Dynamic)',
     short: 'Build a strong online presence for your business',
     points: [
       'Build a strong online presence for your business',
       'Attract more customers with a modern design',
       'Increase inquiries and showcase your services',
     ],
+    icon: 'web',
   },
   {
-    title: '⚙️ CRM / HRM / Billing Software',
+    title: 'CRM / HRM / Billing Software',
     short: 'Manage your business data in one place',
     points: [
       'Manage your business data in one place',
       'Save time with automation and reduce manual work',
       'Track sales, employees, and performance easily',
     ],
+    icon: 'crm',
   },
   {
-    title: '📱 Mobile Application Development',
+    title: 'Mobile Application Development',
     short: 'Connect with customers directly on mobile',
     points: [
       'Connect with customers directly on mobile',
       'Improve user experience and engagement',
       'Grow your brand visibility and reach',
     ],
+    icon: 'mobile',
   },
   {
-    title: '📲 WhatsApp API Integration',
+    title: 'WhatsApp API Integration',
     short: 'Automate replies and customer communication',
     points: [
       'Automate replies and customer communication',
       'Send offers, updates, and notifications instantly',
       'Increase sales with direct customer interaction',
     ],
+    icon: 'whatsapp',
   },
   {
-    title: '💳 Payment Gateway Integration',
+    title: 'Payment Gateway Integration',
     short: 'Accept online payments easily and securely',
     points: [
       'Accept online payments easily and securely',
       'Provide multiple payment options to customers',
       'Improve trust and convenience for users',
     ],
+    icon: 'payment',
   },
   {
-    title: '📩 SMS Automation',
+    title: 'SMS Automation',
     short: 'Send bulk messages quickly to customers',
     points: [
       'Send bulk messages quickly to customers',
       'Share offers, alerts, and important updates',
       'Stay connected even without internet',
     ],
+    icon: 'sms',
   },
   {
-    title: '📍 Google Maps Business Setup',
+    title: 'Google Maps Business Setup',
     short: 'Make your business visible on Google search',
     points: [
       'Make your business visible on Google search',
       'Attract nearby customers easily',
       'Build trust with reviews and location presence',
     ],
+    icon: 'maps',
   },
 ]
 

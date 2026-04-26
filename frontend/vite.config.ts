@@ -35,7 +35,7 @@ function contactApiDevMock(): Plugin {
             JSON.stringify({
               ok: true,
               message:
-                'Thank you! Your message has been received. (Dev mock — connect your backend for production.)',
+                'Thank you! Your message has been received. We will get back to you shortly.',
             })
           )
         })

@@ -148,7 +148,7 @@ export function ContactForm() {
         type: 'success',
         text: messageFromJson(
           data,
-          'Thank you! Your message has been sent successfully.'
+          'Thank you! Your message has been received. We will get back to you shortly.'
         ),
       })
     } catch {

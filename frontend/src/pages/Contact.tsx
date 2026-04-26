@@ -45,7 +45,7 @@ export function Contact() {
                     Company
                   </p>
                   <p className="mt-1 text-slate-800">
-                    SM Tech Solutions Private Limited
+                    AASHA-SM TECHNOLOGIES PRIVATE LIMITED
                   </p>
                 </div>
               </div>

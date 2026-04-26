@@ -3,7 +3,7 @@ const WHATSAPP_PHONE = '919876543210'
 
 export function WhatsAppFloat() {
   const href = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(
-    'Hi SM Tech Solutions, I would like to discuss a project.'
+    'Hi AASHA-SM TECHNOLOGIES, I would like to discuss a project.'
   )}`
 
   return (

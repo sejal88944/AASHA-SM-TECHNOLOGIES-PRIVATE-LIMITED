@@ -17,10 +17,10 @@ export function Navbar() {
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <NavLink
           to="/"
-          className="flex items-center gap-2 py-0.5"
+          className="flex shrink-0 items-center py-0.5"
           onClick={() => setOpen(false)}
         >
-          <Logo className="h-9 w-auto max-h-10 max-w-[140px] object-contain sm:h-10 sm:max-h-11 sm:max-w-[160px]" />
+          <Logo className="block h-9 w-auto max-h-10 max-w-[min(72vw,280px)] object-contain object-left sm:h-10 sm:max-h-11 sm:max-w-[320px]" />
         </NavLink>
 
         <div className="hidden items-center gap-1 md:flex">

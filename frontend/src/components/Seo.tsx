@@ -7,21 +7,23 @@ type SeoConfig = {
   description: string
 }
 
+const SITE_NAME = 'AASHA-SM TECHNOLOGIES PRIVATE LIMITED'
+
 const ROUTE_SEO: Record<string, SeoConfig> = {
   '/': {
-    title: 'SM Tech Solutions Private Limited | IT & Digital Services in India',
+    title: SITE_NAME,
     description:
-      'SM Tech Solutions Private Limited — websites, automation, bulk SMS, WhatsApp marketing and software for businesses across India.',
+      `${SITE_NAME} — websites, automation, bulk SMS, WhatsApp marketing and software for businesses across India.`,
   },
   '/services': {
-    title: 'Services | SM Tech Solutions Private Limited',
+    title: `Services | ${SITE_NAME}`,
     description:
-      'Explore digital services from SM Tech Solutions Private Limited: development, integrations, SMS, WhatsApp and more for Indian businesses.',
+      `Explore digital services from ${SITE_NAME}: development, integrations, SMS, WhatsApp and more for Indian businesses.`,
   },
   '/contact': {
-    title: 'Contact | SM Tech Solutions Private Limited',
+    title: `Contact | ${SITE_NAME}`,
     description:
-      'Contact SM Tech Solutions Private Limited for demos, quotes and support. Serving clients across India.',
+      `Contact ${SITE_NAME} for demos, quotes and support. Serving clients across India.`,
   },
 }
 
@@ -80,6 +82,14 @@ export function Seo() {
       document.head.appendChild(ogDesc)
     }
     ogDesc.setAttribute('content', seo.description)
+
+    let ogSite = document.querySelector('meta[property="og:site_name"]')
+    if (!ogSite) {
+      ogSite = document.createElement('meta')
+      ogSite.setAttribute('property', 'og:site_name')
+      document.head.appendChild(ogSite)
+    }
+    ogSite.setAttribute('content', SITE_NAME)
   }, [canonical, seo.description, seo.title])
 
   return null

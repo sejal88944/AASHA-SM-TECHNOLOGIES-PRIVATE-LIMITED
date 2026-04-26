@@ -7,11 +7,11 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-3">
           <div>
-            <Link to="/" className="inline-block">
-              <Logo className="h-10 w-auto max-h-12 max-w-[180px] object-contain sm:h-11" />
+            <Link to="/" className="inline-block max-w-full">
+              <Logo className="block h-10 w-auto max-h-12 max-w-[min(100%,300px)] object-contain object-left sm:h-11 sm:max-w-[340px]" />
             </Link>
             <p className="mt-3 text-sm leading-relaxed text-slate-600">
-              SM Tech Solutions Private Limited — websites, apps, automation, bulk SMS,
+              AASHA-SM TECHNOLOGIES PRIVATE LIMITED — websites, apps, automation, bulk SMS,
               and WhatsApp marketing for businesses across India.
             </p>
           </div>
@@ -57,7 +57,7 @@ export function Footer() {
               </a>
             </p>
             <p className="mt-2 text-xs text-slate-500">
-              © {new Date().getFullYear()} SM Tech Solutions Private Limited. All rights reserved.
+              © {new Date().getFullYear()} AASHA-SM TECHNOLOGIES PRIVATE LIMITED. All rights reserved.
             </p>
           </div>
         </div>

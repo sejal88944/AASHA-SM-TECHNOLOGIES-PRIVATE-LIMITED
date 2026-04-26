@@ -90,7 +90,8 @@ module.exports = async function handler(req, res) {
 
     return res.status(200).json({
       ok: true,
-      message: "Thank you! Your message has been saved.",
+      message:
+        "Thank you! Your message has been received. We will get back to you shortly.",
     });
   } catch (err) {
     console.error(err);
