@@ -2,8 +2,20 @@
   command = "npm run build"
   publish = "dist"
 
-# Netlify serves real files in `dist` before this fallback.
-# If sitemap ever returned HTML, check Site settings → Build & deploy → Post processing.
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap.xml"
+  status = 200
+
+[[redirects]]
+  from = "/robots.txt"
+  to = "/robots.txt"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
 
 [[headers]]
   for = "/sitemap.xml"

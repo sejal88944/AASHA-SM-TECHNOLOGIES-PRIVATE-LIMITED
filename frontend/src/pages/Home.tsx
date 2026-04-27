@@ -25,14 +25,11 @@ export function Home() {
               customer engagement and business growth.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
-              <a
-                href="tel:+919579592684"
-                className="inline-flex items-center justify-center rounded-lg bg-brand-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-800"
-              >
-                Call Now
-              </a>
               <Button to="/services" variant="secondary">
                 View Services
+              </Button>
+              <Button to="/contact" variant="outline">
+                Get in Touch
               </Button>
             </div>
           </header>

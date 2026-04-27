@@ -58,6 +58,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [react(), ...(useContactMock ? [contactApiDevMock()] : [])],
+    publicDir: 'public',
     esbuild: prod
       ? { legalComments: 'none', drop: ['console', 'debugger'] as const }
       : undefined,
