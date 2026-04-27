@@ -43,6 +43,11 @@ export function Navbar() {
             </NavLink>
           </li>
           <li>
+            <NavLink to="/blog" className={linkClass}>
+              Blog
+            </NavLink>
+          </li>
+          <li>
             <NavLink to="/contact" className={linkClass}>
               Contact
             </NavLink>
@@ -82,6 +87,11 @@ export function Navbar() {
             <li>
               <NavLink to="/services" className={linkClass} onClick={() => setOpen(false)}>
                 Services
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/blog" className={linkClass} onClick={() => setOpen(false)}>
+                Blog
               </NavLink>
             </li>
             <li>

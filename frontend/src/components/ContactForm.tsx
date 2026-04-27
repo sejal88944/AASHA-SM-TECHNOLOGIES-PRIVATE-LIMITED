@@ -165,6 +165,7 @@ export function ContactForm() {
       phone: normalizePhoneDigits(form.phone),
       email: form.email.trim(),
       message: form.message.trim(),
+      source: 'contact_form',
     }
 
     try {

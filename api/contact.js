@@ -11,6 +11,7 @@ const contactSchema = new mongoose.Schema(
     phone: { type: String, required: true },
     email: { type: String, default: "" },
     message: { type: String, required: true },
+    source: { type: String, default: "contact_form" },
     officeAddress: { type: String, default: "" },
     mapsUrl: { type: String, default: "" },
   },
@@ -25,6 +26,7 @@ const DEFAULT_MAPS_URL =
 
 const CONTACTS_COLLECTION =
   process.env.MONGODB_CONTACTS_COLLECTION || "sejal_contacts";
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function getMongoUri() {
   return (
@@ -61,6 +63,44 @@ async function connect() {
   return cache.conn;
 }
 
+function normalizePhoneDigits(raw) {
+  let d = String(raw || "").replace(/\D/g, "");
+  if (d.length === 12 && d.startsWith("91")) d = d.slice(2);
+  if (d.length === 11 && d.startsWith("0")) d = d.slice(1);
+  return d;
+}
+
+function validatePayload(body) {
+  const out = {};
+  const source = String(body?.source || "contact_form").trim();
+  out.source = source === "popup_lead" ? "popup_lead" : "contact_form";
+  const name = String(body?.name || "").trim();
+  if (name.length < 2 || name.length > 120) {
+    return { message: "Name must be between 2 and 120 characters." };
+  }
+  out.name = name;
+
+  const phone = normalizePhoneDigits(body?.phone);
+  if (phone.length !== 10 || !/^[6-9]/.test(phone)) {
+    return { message: "Please enter a valid 10-digit mobile number." };
+  }
+  out.phone = phone;
+
+  const email = String(body?.email || "").trim();
+  if (!email || email.length > 254 || !EMAIL_REGEX.test(email)) {
+    return { message: "Please enter a valid email address." };
+  }
+  out.email = email;
+
+  const message = String(body?.message || "").trim();
+  if (message.length < 10 || message.length > 4000) {
+    return { message: "Message must be between 10 and 4000 characters." };
+  }
+  out.message = message;
+
+  return { out };
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method not allowed" });
@@ -72,21 +112,18 @@ module.exports = async function handler(req, res) {
       mongoose.models.Contact ||
       mongoose.model("Contact", contactSchema, CONTACTS_COLLECTION);
 
-    const { name, phone, email, message, officeAddress, mapsUrl } = req.body || {};
-    if (!name?.trim() || !phone?.trim() || !message?.trim()) {
-      return res.status(400).json({
-        message: "Name, phone, and message are required.",
-      });
-    }
+    const checked = validatePayload(req.body);
+    if (!checked.out) return res.status(400).json({ message: checked.message });
+    const { name, phone, email, message, source } = checked.out;
 
     await Contact.create({
-      name: name.trim(),
-      phone: String(phone).replace(/\D/g, ""),
-      email: (email && String(email).trim()) || "",
-      message: message.trim(),
-      officeAddress:
-        (officeAddress && String(officeAddress).trim()) || DEFAULT_OFFICE_ADDRESS,
-      mapsUrl: (mapsUrl && String(mapsUrl).trim()) || DEFAULT_MAPS_URL,
+      name,
+      phone,
+      email,
+      message,
+      source,
+      officeAddress: DEFAULT_OFFICE_ADDRESS,
+      mapsUrl: DEFAULT_MAPS_URL,
     });
 
     return res.status(200).json({
@@ -95,7 +132,11 @@ module.exports = async function handler(req, res) {
         "Thank you! Your message has been received. We will get back to you shortly.",
     });
   } catch (err) {
-    console.error(err);
+    console.error("contact_api_error", {
+      message: err?.message,
+      code: err?.code,
+      name: err?.name,
+    });
     const code = err.statusCode || 500;
     if (code === 500 && err.message?.includes("MONGODB_URI")) {
       return res.status(500).json({

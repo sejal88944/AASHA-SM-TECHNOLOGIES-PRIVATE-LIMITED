@@ -21,11 +21,10 @@ export function Contact() {
               Let’s start a conversation
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-slate-600 sm:mx-0 sm:text-left">
-              Share a bit about your project—website development in Pune, SMS automation
-              India-wide, or other IT needs—and we will get back to you shortly.
+              Share your requirement and our team will contact you shortly.
             </p>
             <p className="mx-auto mt-4 max-w-2xl text-center text-base text-slate-600 sm:mx-0 sm:text-left">
-              You can also review our <Link to="/services" className="font-medium text-brand-900 hover:underline">service list</Link> or read more <Link to="/about" className="font-medium text-brand-900 hover:underline">about our company</Link> before contacting us.
+              Review our <Link to="/services" className="font-medium text-brand-900 hover:underline">services</Link> or <Link to="/about" className="font-medium text-brand-900 hover:underline">about page</Link> before sending details.
             </p>
           </header>
         </div>
@@ -42,7 +41,7 @@ export function Contact() {
                 align="left"
                 eyebrow="Reach us"
                 title="Contact details"
-                subtitle="Prefer email? Reach us directly or use the form."
+                subtitle="Email us directly or use the form."
               />
               <div className="mt-8 space-y-6 rounded-xl border border-slate-200 bg-slate-50/80 p-8">
                 <div>

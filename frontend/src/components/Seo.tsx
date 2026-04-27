@@ -9,11 +9,11 @@ type SeoConfig = {
 
 const SITE_NAME = 'AASHA-SM TECHNOLOGIES PRIVATE LIMITED'
 const HOME_TITLE =
-  'Website Development Pune & SMS Automation India | AASHA-SM TECHNOLOGIES'
+  'SMS Automation India & Website Development India | AASHA-SM TECHNOLOGIES'
 const DEFAULT_DESCRIPTION =
-  'AASHA-SM TECHNOLOGIES is an IT company Maharashtra businesses trust for website development India, SMS automation India, and API integration services.'
+  'IT company Maharashtra businesses trust for SMS automation India and website development India. Get practical digital solutions for growth.'
 const KEYWORDS =
-  'SMS automation India, website development Pune, IT company Maharashtra'
+  'SMS automation India, website development India, IT company Maharashtra'
 const OG_IMAGE = `${SITE_ORIGIN}/logo.webp?v=4`
 const OG_IMAGE_ALT = 'AASHA-SM TECHNOLOGIES logo'
 
@@ -31,6 +31,11 @@ const ROUTE_SEO: Record<string, SeoConfig> = {
     title: `IT Services Pune & SMS Automation | AASHA-SM TECHNOLOGIES`,
     description:
       'Explore website development Pune, SMS automation India, integrations, and IT services from a Maharashtra-based technology partner.',
+  },
+  '/blog': {
+    title: `Blog | SMS Automation India & Website Development India`,
+    description:
+      'Read practical guides on SMS automation India, website development India, and API integration services to improve business growth.',
   },
   '/contact': {
     title: `Contact | Website Development & SMS Automation | Pune`,

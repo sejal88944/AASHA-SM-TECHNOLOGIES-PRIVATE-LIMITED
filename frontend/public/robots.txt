@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Host: https://smtechsolutions.in
 
 Sitemap: https://smtechsolutions.in/sitemap.xml

@@ -60,16 +60,12 @@ export function Services() {
             Core services
           </h2>
           <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-600 sm:text-lg">
-            These services are designed to improve customer experience, increase operational speed,
-            and support measurable business growth.
+            Website development India, SMS automation India, and API integration services focused
+            on leads, automation, and business growth.
           </p>
-          <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-600 sm:text-lg">
-            We keep communication simple, timelines transparent, and implementation aligned with
-            your business priorities.
-          </p>
-          <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-600 sm:text-lg">
-            Know more <Link to="/about" className="font-medium text-brand-900 hover:underline">about our working style</Link> or{' '}
-            <Link to="/contact" className="font-medium text-brand-900 hover:underline">contact us</Link> to request a plan for your business.
+          <p className="mt-3 max-w-3xl text-base leading-relaxed text-slate-600 sm:text-lg">
+            Know more <Link to="/about" className="font-medium text-brand-900 hover:underline">about us</Link> or{' '}
+            <Link to="/contact" className="font-medium text-brand-900 hover:underline">contact us</Link> for a quick plan.
           </p>
           <div className="mt-14 grid gap-8 lg:grid-cols-2 lg:gap-10">
             {services.map((s) => (
@@ -113,7 +109,7 @@ export function Services() {
             id="services-process-heading"
             eyebrow="How we work"
             title="Work process"
-            subtitle="A clear path from idea to production—with checkpoints you can trust."
+            subtitle="Simple 5-step delivery process."
           />
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-5 lg:gap-5">
             {workProcess.map((w) => (

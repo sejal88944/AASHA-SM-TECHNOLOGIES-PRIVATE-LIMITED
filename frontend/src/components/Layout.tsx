@@ -1,13 +1,9 @@
-import { Suspense, lazy } from 'react'
+import { Suspense } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Footer } from './Footer'
+import { LeadPopup } from './LeadPopup'
 import { Navbar } from './Navbar'
 import { Seo } from './Seo'
-
-const WhatsAppFloat = lazy(async () => {
-  const m = await import('./WhatsAppFloat')
-  return { default: m.WhatsAppFloat }
-})
 
 function PageFallback() {
   return (
@@ -33,9 +29,7 @@ export function Layout() {
         </Suspense>
       </main>
       <Footer />
-      <Suspense fallback={null}>
-        <WhatsAppFloat />
-      </Suspense>
+      <LeadPopup />
     </div>
   )
 }

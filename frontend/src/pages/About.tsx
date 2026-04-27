@@ -38,9 +38,8 @@ export function About() {
               Technology that supports your business—not the other way around
             </h1>
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">
-              AASHA-SM TECHNOLOGIES PRIVATE LIMITED is a Maharashtra-based IT partner for
-              organisations that want dependable delivery, plain-language communication, and
-              solutions that scale with real usage.
+              AASHA-SM TECHNOLOGIES PRIVATE LIMITED is an IT company Maharashtra businesses trust
+              for website development India, SMS automation India, and API integration services.
             </p>
           </header>
         </div>
@@ -55,7 +54,7 @@ export function About() {
             id="about-focus-heading"
             eyebrow="Focus areas"
             title="Where we spend most of our time"
-            subtitle="Three pillars that cover how most clients first engage with us."
+            subtitle="Three core services with clear business benefits."
           />
           <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
             {focusAreas.map((item) => (
