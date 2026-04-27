@@ -1,5 +1,8 @@
 {
   "name": "aasha-sm-monorepo",
   "private": true,
-  "description": "Vercel: Root Directory blank (repo root). Build runs in frontend/ per vercel.json."
+  "description": "Vercel: Root Directory blank (repo root). Build runs in frontend/ per vercel.json.",
+  "scripts": {
+    "test:vercel-config": "node scripts/validate-vercel-config.mjs"
+  }
 }
