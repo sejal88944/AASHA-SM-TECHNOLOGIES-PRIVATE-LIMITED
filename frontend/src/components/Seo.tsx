@@ -8,22 +8,34 @@ type SeoConfig = {
 }
 
 const SITE_NAME = 'AASHA-SM TECHNOLOGIES PRIVATE LIMITED'
+const HOME_TITLE =
+  'Website Development Pune & SMS Automation India | AASHA-SM TECHNOLOGIES'
+const DEFAULT_DESCRIPTION =
+  'AASHA-SM TECHNOLOGIES is an IT company Maharashtra businesses trust for website development India, SMS automation India, and API integration services.'
+const KEYWORDS =
+  'SMS automation India, website development Pune, IT company Maharashtra'
+const OG_IMAGE = `${SITE_ORIGIN}/logo.webp?v=4`
+const OG_IMAGE_ALT = 'AASHA-SM TECHNOLOGIES logo'
 
 const ROUTE_SEO: Record<string, SeoConfig> = {
   '/': {
-    title: SITE_NAME,
+    title: HOME_TITLE,
+    description: DEFAULT_DESCRIPTION,
+  },
+  '/about': {
+    title: `About Us | IT Company Maharashtra | AASHA-SM TECHNOLOGIES`,
     description:
-      `${SITE_NAME} — websites, automation, bulk SMS, WhatsApp marketing and software for businesses across India.`,
+      `Learn about ${SITE_NAME}: website development Pune, SMS automation India, API integration, and how we work with clients across Maharashtra and beyond.`,
   },
   '/services': {
-    title: `Services | ${SITE_NAME}`,
+    title: `IT Services Pune & SMS Automation | AASHA-SM TECHNOLOGIES`,
     description:
-      `Explore digital services from ${SITE_NAME}: development, integrations, SMS, WhatsApp and more for Indian businesses.`,
+      'Explore website development Pune, SMS automation India, integrations, and IT services from a Maharashtra-based technology partner.',
   },
   '/contact': {
-    title: `Contact | ${SITE_NAME}`,
+    title: `Contact | Website Development & SMS Automation | Pune`,
     description:
-      `Contact ${SITE_NAME} for demos, quotes and support. Serving clients across India.`,
+      `Contact ${SITE_NAME} for website development in Pune, SMS automation across India, API work, demos, and quotes.`,
   },
 }
 
@@ -50,6 +62,14 @@ export function Seo() {
       document.head.appendChild(metaDesc)
     }
     metaDesc.setAttribute('content', seo.description)
+
+    let metaKeywords = document.querySelector('meta[name="keywords"]')
+    if (!metaKeywords) {
+      metaKeywords = document.createElement('meta')
+      metaKeywords.setAttribute('name', 'keywords')
+      document.head.appendChild(metaKeywords)
+    }
+    metaKeywords.setAttribute('content', KEYWORDS)
 
     let canonicalLink = document.querySelector('link[rel="canonical"]')
     if (!canonicalLink) {
@@ -90,6 +110,22 @@ export function Seo() {
       document.head.appendChild(ogSite)
     }
     ogSite.setAttribute('content', SITE_NAME)
+
+    let ogImage = document.querySelector('meta[property="og:image"]')
+    if (!ogImage) {
+      ogImage = document.createElement('meta')
+      ogImage.setAttribute('property', 'og:image')
+      document.head.appendChild(ogImage)
+    }
+    ogImage.setAttribute('content', OG_IMAGE)
+
+    let ogImageAlt = document.querySelector('meta[property="og:image:alt"]')
+    if (!ogImageAlt) {
+      ogImageAlt = document.createElement('meta')
+      ogImageAlt.setAttribute('property', 'og:image:alt')
+      document.head.appendChild(ogImageAlt)
+    }
+    ogImageAlt.setAttribute('content', OG_IMAGE_ALT)
   }, [canonical, seo.description, seo.title])
 
   return null

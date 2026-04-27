@@ -3,13 +3,13 @@
   "name": "AASHA-SM TECHNOLOGIES PRIVATE LIMITED",
   "icons": [
     {
-      "src": "favicon.jpg?v=3",
+      "src": "favicon.jpg?v=4",
       "type": "image/jpeg",
       "sizes": "192x192"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#1e40af",
+  "theme_color": "#172554",
   "background_color": "#ffffff"
 }

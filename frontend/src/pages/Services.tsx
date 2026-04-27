@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { SectionHeading } from '../components/SectionHeading'
 import { ServiceIcon } from '../components/ServiceIcons'
 import { services, workProcess } from '../data/services'
@@ -20,45 +21,79 @@ function CheckIcon({ className }: { className?: string }) {
 export function Services() {
   return (
     <div className="bg-white">
-      <section className="border-b border-brand-100 bg-hero-mesh py-16 sm:py-20">
+      <section
+        className="border-b border-slate-200/80 bg-hero-mesh py-20 sm:py-24"
+        aria-labelledby="services-page-heading"
+      >
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <p className="text-sm font-semibold uppercase tracking-wide text-brand-700">
-            Services
-          </p>
-          <h1 className="mt-2 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
-            Everything you need to go digital
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">
-            Detailed overview of our offerings. Each engagement is scoped to your
-            workflows, security needs, and growth plans.
-          </p>
+          <header>
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-800 sm:text-sm">
+              Services
+            </p>
+            <h1
+              id="services-page-heading"
+              className="mt-3 text-4xl font-bold tracking-tight text-brand-950 sm:mt-4 sm:text-5xl"
+            >
+              Services for business growth
+            </h1>
+            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">
+              AASHA-SM TECHNOLOGIES PRIVATE LIMITED offers client-focused digital services with
+              clear planning, clean execution, and ongoing support.
+            </p>
+            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">
+              As an IT company Maharashtra businesses work with for long-term value, we focus on
+              Website Development, SMS Automation, and API Integration.
+            </p>
+          </header>
         </div>
       </section>
 
-      <section className="py-16 sm:py-20">
+      <section
+        className="bg-white py-20 sm:py-24"
+        aria-labelledby="services-catalogue-heading"
+      >
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 sm:grid-cols-2">
+          <h2
+            id="services-catalogue-heading"
+            className="text-2xl font-bold tracking-tight text-brand-950 sm:text-3xl"
+          >
+            Core services
+          </h2>
+          <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-600 sm:text-lg">
+            These services are designed to improve customer experience, increase operational speed,
+            and support measurable business growth.
+          </p>
+          <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-600 sm:text-lg">
+            We keep communication simple, timelines transparent, and implementation aligned with
+            your business priorities.
+          </p>
+          <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-600 sm:text-lg">
+            Know more <Link to="/about" className="font-medium text-brand-900 hover:underline">about our working style</Link> or{' '}
+            <Link to="/contact" className="font-medium text-brand-900 hover:underline">contact us</Link> to request a plan for your business.
+          </p>
+          <div className="mt-14 grid gap-8 lg:grid-cols-2 lg:gap-10">
             {services.map((s) => (
               <article
                 key={s.title}
-                className="group relative flex flex-col rounded-2xl border border-slate-200/90 bg-white p-8 shadow-sm ring-1 ring-slate-900/[0.04] transition duration-300 hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-card"
+                className="flex h-full flex-col rounded-xl border border-slate-200/90 bg-white p-8 transition-colors duration-200 hover:border-brand-900/20 hover:shadow-card lg:p-10"
               >
-                <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-brand-300/60 to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
-                <div className="flex items-start gap-5">
-                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-soft ring-4 ring-brand-500/10 transition duration-300 group-hover:ring-brand-400/25">
+                <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-6">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-brand-900 text-white shadow-sm sm:h-11 sm:w-11">
                     <ServiceIcon id={s.icon} className="h-6 w-6" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h2 className="text-xl font-semibold tracking-tight text-slate-900">
+                    <h3 className="text-lg font-semibold tracking-tight text-brand-950 sm:text-xl">
                       {s.title}
-                    </h2>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-600">{s.short}</p>
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-[0.9375rem]">
+                      {s.short}
+                    </p>
                   </div>
                 </div>
-                <ul className="mt-8 flex flex-col gap-3 border-t border-slate-100 pt-8 text-sm text-slate-700">
+                <ul className="mt-8 flex flex-1 flex-col gap-4 border-t border-slate-200/90 pt-8 text-sm leading-relaxed text-slate-700">
                   {s.points.map((line) => (
-                    <li key={line} className="flex gap-3 leading-relaxed">
-                      <CheckIcon className="mt-0.5 h-5 w-5 shrink-0 text-brand-600" />
+                    <li key={line} className="flex gap-3">
+                      <CheckIcon className="mt-0.5 h-5 w-5 shrink-0 text-brand-900" />
                       <span>{line}</span>
                     </li>
                   ))}
@@ -69,26 +104,30 @@ export function Services() {
         </div>
       </section>
 
-      <section className="border-t border-brand-100 bg-slate-50 py-16 sm:py-20">
+      <section
+        className="border-t border-slate-200/80 bg-slate-50/50 py-20 sm:py-24"
+        aria-labelledby="services-process-heading"
+      >
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
+            id="services-process-heading"
             eyebrow="How we work"
             title="Work process"
             subtitle="A clear path from idea to production—with checkpoints you can trust."
           />
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-5 lg:gap-5">
             {workProcess.map((w) => (
-              <div
+              <article
                 key={w.step}
-                className="relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm ring-1 ring-slate-900/[0.03] transition duration-300 hover:border-brand-200 hover:shadow-soft"
+                className="flex h-full flex-col rounded-xl border border-slate-200/90 bg-white p-6 transition-colors hover:border-brand-900/15"
               >
-                <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-500 via-brand-600 to-brand-500" />
-                <h3 className="mt-2 text-lg font-semibold text-slate-900">{w.step}</h3>
+                <div className="h-0.5 w-8 rounded-full bg-brand-900" />
+                <h3 className="mt-5 text-base font-semibold text-brand-950">{w.step}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-slate-600">{w.text}</p>
-              </div>
+              </article>
             ))}
           </div>
-          <p className="mt-8 text-center text-sm text-slate-500 lg:hidden">
+          <p className="mt-10 text-center text-sm text-slate-500 lg:hidden">
             {workProcess.map((w) => w.step).join(' → ')}
           </p>
         </div>

@@ -11,15 +11,15 @@ type ButtonProps = {
 }
 
 const base =
-  'inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600'
+  'inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-900'
 
 const variants = {
   primary:
-    'bg-brand-600 text-white shadow-soft hover:bg-brand-700 active:bg-brand-800',
+    'bg-brand-900 text-white shadow-sm hover:bg-brand-800 active:bg-brand-950',
   secondary:
-    'bg-white text-brand-700 shadow-soft ring-1 ring-brand-200 hover:bg-brand-50',
+    'bg-white text-brand-900 shadow-sm ring-1 ring-slate-200 hover:bg-slate-50',
   outline:
-    'border-2 border-brand-600 text-brand-700 hover:bg-brand-50 bg-white/80',
+    'border border-brand-900 text-brand-900 hover:bg-slate-50 bg-white',
 }
 
 export function Button({

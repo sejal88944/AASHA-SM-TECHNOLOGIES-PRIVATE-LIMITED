@@ -8,20 +8,25 @@ type ServiceCardProps = {
 
 export function ServiceCard({ title, description, icon }: ServiceCardProps) {
   return (
-    <div className="group rounded-2xl border border-brand-100 bg-white p-6 shadow-card transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-lg">
-      <div className="flex items-start gap-4">
+    <article className="group flex h-full flex-col rounded-xl border border-slate-200/90 bg-white p-7 transition-colors duration-200 hover:border-brand-900/25 hover:shadow-card lg:p-8">
+      <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
         {icon && (
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-soft">
+          <div
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-brand-900 text-white shadow-sm sm:h-11 sm:w-11"
+            aria-hidden
+          >
             {icon}
           </div>
         )}
-        <div>
-          <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
-          <p className="mt-2 text-sm leading-relaxed text-slate-600">
+        <div className="min-w-0 flex-1">
+          <h3 className="text-base font-semibold leading-snug tracking-tight text-brand-950 sm:text-lg">
+            {title}
+          </h3>
+          <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-[0.9375rem]">
             {description}
           </p>
         </div>
       </div>
-    </div>
+    </article>
   )
 }

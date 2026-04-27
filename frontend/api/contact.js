@@ -1,5 +1,6 @@
 /**
  * Vercel serverless: POST /api/contact — same contract as sejal-api.
+ * If Vercel Root Directory is repo root, ../../api/contact.js is the copy to sync.
  * Set MONGODB_URI in Vercel → Environment Variables (Production).
  */
 const mongoose = require("mongoose");

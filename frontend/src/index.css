@@ -7,6 +7,11 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply antialiased text-slate-800 bg-white;
+    @apply antialiased text-slate-700 bg-white;
+  }
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
   }
 }

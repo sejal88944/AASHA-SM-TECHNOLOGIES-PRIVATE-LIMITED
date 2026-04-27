@@ -54,8 +54,33 @@ export default defineConfig(({ mode }) => {
   const proxyToApi =
     mode === 'development' && env.VITE_CONTACT_MOCK === '0'
 
+  const prod = mode === 'production'
+
   return {
     plugins: [react(), ...(useContactMock ? [contactApiDevMock()] : [])],
+    esbuild: prod
+      ? { legalComments: 'none', drop: ['console', 'debugger'] as const }
+      : undefined,
+    build: {
+      target: 'es2020',
+      cssMinify: true,
+      minify: 'esbuild',
+      cssCodeSplit: true,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (!id.includes('node_modules')) return
+            if (
+              id.includes('node_modules/react-dom') ||
+              id.includes('node_modules/react-router') ||
+              id.includes('node_modules/react/')
+            ) {
+              return 'react-vendor'
+            }
+          },
+        },
+      },
+    },
     server: {
       // When VITE_CONTACT_MOCK=0, forward /api to sejal-api (see ../sejal-api).
       proxy: proxyToApi
