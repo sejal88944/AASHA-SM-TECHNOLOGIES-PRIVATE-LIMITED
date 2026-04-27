@@ -13,7 +13,7 @@ const HOME_TITLE =
 const DEFAULT_DESCRIPTION =
   'IT company Maharashtra businesses trust for SMS automation India and website development India. Get practical digital solutions for growth.'
 const KEYWORDS =
-  'SMS automation India, website development India, IT company Maharashtra'
+  'SMS automation India, website development India, IT company Maharashtra, API integration services'
 const OG_IMAGE = `${SITE_ORIGIN}/logo.webp?v=4`
 const OG_IMAGE_ALT = 'AASHA-SM TECHNOLOGIES logo'
 
@@ -28,9 +28,9 @@ const ROUTE_SEO: Record<string, SeoConfig> = {
       `Learn about ${SITE_NAME}: website development Pune, SMS automation India, API integration, and how we work with clients across Maharashtra and beyond.`,
   },
   '/services': {
-    title: `IT Services Pune & SMS Automation | AASHA-SM TECHNOLOGIES`,
+    title: `Website Development Pune & SMS Automation India Services`,
     description:
-      'Explore website development Pune, SMS automation India, integrations, and IT services from a Maharashtra-based technology partner.',
+      'Explore website development Pune, SMS automation India, and API integration services from a Maharashtra-based technology partner.',
   },
   '/blog': {
     title: `Blog | SMS Automation India & Website Development India`,

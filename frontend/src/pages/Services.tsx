@@ -128,6 +128,21 @@ export function Services() {
           </p>
         </div>
       </section>
+
+      <section className="border-t border-slate-200 bg-white py-16 sm:py-20" aria-labelledby="services-next-steps-heading">
+        <div className="mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
+          <h2
+            id="services-next-steps-heading"
+            className="text-2xl font-bold tracking-tight text-brand-950 sm:text-3xl"
+          >
+            Next steps
+          </h2>
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">
+            Learn more <Link to="/about" className="font-semibold text-brand-900 hover:underline">about our IT company</Link> or{' '}
+            <Link to="/contact" className="font-semibold text-brand-900 hover:underline">contact us for business solutions</Link> to get a practical execution plan.
+          </p>
+        </div>
+      </section>
     </div>
   )
 }

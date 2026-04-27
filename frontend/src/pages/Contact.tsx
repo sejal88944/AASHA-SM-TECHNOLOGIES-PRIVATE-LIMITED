@@ -26,6 +26,13 @@ export function Contact() {
             <p className="mx-auto mt-4 max-w-2xl text-center text-base text-slate-600 sm:mx-0 sm:text-left">
               Review our <Link to="/services" className="font-medium text-brand-900 hover:underline">services</Link> or <Link to="/about" className="font-medium text-brand-900 hover:underline">about page</Link> before sending details.
             </p>
+            <p className="mx-auto mt-3 max-w-2xl text-center text-sm text-slate-600 sm:mx-0 sm:text-left">
+              For faster planning, check{' '}
+              <Link to="/services" className="font-semibold text-brand-900 hover:underline">
+                Website Development & SMS Automation Services
+              </Link>{' '}
+              and share your requirement in the form below.
+            </p>
           </header>
         </div>
       </section>

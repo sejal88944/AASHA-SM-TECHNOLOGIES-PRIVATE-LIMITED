@@ -1,4 +1,5 @@
 import { Button } from '../components/Button'
+import { Link } from 'react-router-dom'
 import { SectionHeading } from '../components/SectionHeading'
 
 const focusAreas = [
@@ -40,6 +41,17 @@ export function About() {
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">
               AASHA-SM TECHNOLOGIES PRIVATE LIMITED is an IT company Maharashtra businesses trust
               for website development India, SMS automation India, and API integration services.
+            </p>
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-600">
+              Explore our{' '}
+              <Link to="/services" className="font-semibold text-brand-900 hover:underline">
+                Website Development & SMS Automation Services
+              </Link>{' '}
+              or{' '}
+              <Link to="/contact" className="font-semibold text-brand-900 hover:underline">
+                Contact Us for Business Solutions
+              </Link>
+              .
             </p>
           </header>
         </div>
