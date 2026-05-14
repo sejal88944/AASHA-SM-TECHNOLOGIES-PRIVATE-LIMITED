@@ -53,6 +53,7 @@ export async function submitApplicationFromMultipart(parsed, env, meta = {}) {
   const skills = sanitizeText(fieldFirst(fields, 'skills'), 2000)
   const experienceLevel = sanitizeShort(fieldFirst(fields, 'experienceLevel'), 80)
   const college = sanitizeShort(fieldFirst(fields, 'college'), 200)
+  const linkedIn = sanitizeShort(fieldFirst(fields, 'linkedIn'), 300)
   const github = sanitizeShort(fieldFirst(fields, 'github'), 300)
   const portfolio = sanitizeShort(fieldFirst(fields, 'portfolio'), 300)
   const motivation = sanitizeText(fieldFirst(fields, 'motivation'), 5000)

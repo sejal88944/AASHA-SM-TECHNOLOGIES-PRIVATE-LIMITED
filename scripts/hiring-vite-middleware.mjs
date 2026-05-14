@@ -1,4 +1,4 @@
-import { parseMultipartForm } from '../api/lib/parse-multipart.mjs'
+import { parsedFromWebFormData } from '../api/lib/multipart-from-formdata.mjs'
 import {
   clientIpFromReq,
   getApplicationById,
@@ -63,7 +63,27 @@ export function hiringApiDevMiddleware(env) {
           } catch {
             /* ignore */
           }
-          const parsed = await parseMultipartForm(req, { maxFileBytes: MAX_RESUME_BYTES })
+          const ct = req.headers['content-type'] || ''
+          if (!String(ct).toLowerCase().includes('multipart/form-data')) {
+            return sendJson(400, {
+              ok: false,
+              error: `Expected multipart/form-data; received: ${ct ? String(ct).slice(0, 80) : '(no Content-Type)'}`,
+            })
+          }
+          const chunks = []
+          for await (const c of req) chunks.push(c)
+          const buf = Buffer.concat(chunks)
+          if (!buf.length) {
+            return sendJson(400, { ok: false, error: 'Empty request body' })
+          }
+          const applyUrl = `http://${host}${req.url || ''}`
+          const webReq = new Request(applyUrl, {
+            method: 'POST',
+            headers: { 'content-type': String(ct) },
+            body: buf,
+          })
+          const fd = await webReq.formData()
+          const parsed = await parsedFromWebFormData(fd, MAX_RESUME_BYTES)
           const ip = clientIpFromReq(req)
           const { status, json } = await submitApplicationFromMultipart(parsed, env, { ip, origin })
           return sendJson(status, json)
