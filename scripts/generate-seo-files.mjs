@@ -9,6 +9,7 @@ const PATHS = [
   '/careers',
   '/jobs',
   '/internship',
+  '/apply',
   '/services/website-development',
   '/services/sms-automation',
   '/services/api-integration',
@@ -39,7 +40,7 @@ ${PATHS.map((p) => {
     p === '/crm-software-development-india' ||
     p === '/mobile-app-development-pune' ||
     p === '/whatsapp-marketing-india'
-  const isCareers = p === '/careers' || p === '/jobs' || p === '/internship'
+  const isCareers = p === '/careers' || p === '/jobs' || p === '/internship' || p === '/apply'
   const priority =
     p === '/'
       ? '1.0'
@@ -67,6 +68,7 @@ Allow: /
 
 # Block common junk paths (tune as needed)
 Disallow: /api/
+Disallow: /admin/
 
 Sitemap: ${SITE_URL}/sitemap.xml
 `

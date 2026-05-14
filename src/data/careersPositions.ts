@@ -428,6 +428,6 @@ export function positionsInPool(pool: CareerPool): CareerPosition[] {
 
 export function applyUrlForPosition(title: string): string {
   const q = new URLSearchParams()
-  q.set('interest', `Careers application: ${title}`)
-  return `/contact?${q.toString()}`
+  q.set('position', title)
+  return `/apply?${q.toString()}`
 }

@@ -86,13 +86,13 @@ export function CareersPage() {
           <div className="mt-8 flex min-w-0 flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Link
               className="inline-flex items-center justify-center rounded-xl bg-white px-5 py-3 text-sm font-semibold text-slate-900 hover:bg-slate-100"
-              to="/contact?interest=Careers%20application%20%28general%29"
+              to="/apply"
             >
               Apply Now
             </Link>
             <Link
               className="inline-flex items-center justify-center rounded-xl border border-white/25 bg-white/10 px-5 py-3 text-sm font-semibold text-white hover:bg-white/15"
-              to="/internship"
+              to="/apply?employmentType=Internship"
             >
               Start Internship
             </Link>

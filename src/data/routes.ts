@@ -10,6 +10,7 @@ export const SITEMAP_PATHS: string[] = [
   '/careers',
   '/jobs',
   '/internship',
+  '/apply',
   '/services/website-development',
   '/services/sms-automation',
   '/services/api-integration',

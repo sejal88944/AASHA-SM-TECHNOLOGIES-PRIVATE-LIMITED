@@ -40,6 +40,6 @@ export const careersFaqs: FaqItem[] = [
   {
     question: 'How do I apply without a separate ATS backend?',
     answer:
-      'Use the Apply Now button on any role—it opens the contact form with the role pre-filled. You can also email careers-related context to our official company email listed on the site. We do not require a proprietary portal for first contact.',
+      'Use Apply Now on any role—it opens our structured application page (/apply) with the role pre-filled, resume upload, and skills checklist. Submissions are stored securely for HR review. You can still use the general contact page for business inquiries.',
   },
 ]

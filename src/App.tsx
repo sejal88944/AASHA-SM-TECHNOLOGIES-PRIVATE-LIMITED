@@ -48,6 +48,14 @@ const InternshipPage = lazy(async () => {
   const m = await import('./pages/InternshipPage')
   return { default: m.InternshipPage }
 })
+const ApplyPage = lazy(async () => {
+  const m = await import('./pages/ApplyPage')
+  return { default: m.ApplyPage }
+})
+const AdminHiringPage = lazy(async () => {
+  const m = await import('./pages/AdminHiringPage')
+  return { default: m.AdminHiringPage }
+})
 const SeoLandingPage = lazy(async () => {
   const m = await import('./pages/SeoLandingPage')
   return { default: m.SeoLandingPage }
@@ -74,6 +82,8 @@ export default function App() {
             <Route path="/careers" element={<CareersPage />} />
             <Route path="/jobs" element={<JobsPage />} />
             <Route path="/internship" element={<InternshipPage />} />
+            <Route path="/apply" element={<ApplyPage />} />
+            <Route path="/admin/hiring" element={<AdminHiringPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/blog" element={<BlogIndexPage />} />
             <Route path="/blog/:slug" element={<BlogPostPage />} />

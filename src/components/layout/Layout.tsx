@@ -228,6 +228,9 @@ export function Footer() {
             <Link className="text-slate-300 hover:text-white hover:underline" to="/internship">
               Internship
             </Link>
+            <Link className="text-slate-300 hover:text-white hover:underline" to="/apply">
+              Apply
+            </Link>
           </div>
           <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-x-4 sm:gap-y-2">
             {SEO_LANDING_PAGES.map((p) => (

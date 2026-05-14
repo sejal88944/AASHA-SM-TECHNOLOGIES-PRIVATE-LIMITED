@@ -11,6 +11,18 @@ function readBody(req: Connect.IncomingMessage): Promise<string> {
   })
 }
 
+/** Serves hiring APIs during dev (multipart apply + admin JSON). */
+function hiringApiDevPlugin(env: Record<string, string>): Plugin {
+  return {
+    name: 'hiring-api-dev',
+    async configureServer(server) {
+      // @ts-expect-error — dev-only ESM middleware (no ambient types)
+      const { hiringApiDevMiddleware } = await import('./scripts/hiring-vite-middleware.mjs')
+      server.middlewares.use(hiringApiDevMiddleware(env))
+    },
+  }
+}
+
 /** Serves POST /api/contact during `npm run dev` using the same logic as `api/contact.mjs` + `.env` */
 function contactApiDevPlugin(env: Record<string, string>): Plugin {
   return {
@@ -72,7 +84,7 @@ function contactApiDevPlugin(env: Record<string, string>): Plugin {
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   return {
-    plugins: [contactApiDevPlugin(env), react()],
+    plugins: [hiringApiDevPlugin(env), contactApiDevPlugin(env), react()],
     build: {
       rollupOptions: {
         output: {
