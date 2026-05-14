@@ -118,14 +118,14 @@ export function Footer() {
   return (
     <footer className="border-t border-slate-200 bg-slate-950 text-slate-200">
       <div className="mx-auto max-w-7xl px-4 py-12">
-        {/* xl: 4 cols — below that 1 col (mobile/tablet) or 2 cols (md–lg) without squeezing brand+services side by side */}
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-4 [&>div]:min-w-0">
-          <div className="min-w-0 md:col-span-2 xl:col-span-1">
-            <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:gap-3">
+        {/* 4 columns only from 2xl — avoids ~280px cells where logo+text row overflows into Services */}
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-x-10 md:gap-y-12 2xl:grid-cols-4 2xl:gap-10 [&>div]:min-w-0 [&>div]:overflow-x-clip">
+          <div className="min-w-0 md:col-span-2 2xl:col-span-1">
+            <div className="flex flex-col gap-4">
               <BrandLogo variant="footer" />
-              <div className="min-w-0 max-w-full flex-1">
+              <div className="min-w-0 max-w-full">
                 <div className="text-pretty text-sm font-semibold leading-snug text-white">{COMPANY.legalName}</div>
-                <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                <p className="mt-3 text-pretty text-sm leading-relaxed text-slate-300">
                   Websites, automation, APIs, CRM, and mobile apps—delivered with clear milestones and production-grade integrations.
                 </p>
               </div>
