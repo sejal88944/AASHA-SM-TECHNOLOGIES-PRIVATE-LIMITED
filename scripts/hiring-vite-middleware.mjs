@@ -1,3 +1,4 @@
+import { formatApplyResult } from '../api/lib/apply-response.mjs'
 import { parsedFromWebFormData } from '../api/lib/multipart-from-formdata.mjs'
 import {
   clientIpFromReq,
@@ -86,7 +87,7 @@ export function hiringApiDevMiddleware(env) {
           const parsed = await parsedFromWebFormData(fd, MAX_RESUME_BYTES)
           const ip = clientIpFromReq(req)
           const { status, json } = await submitApplicationFromMultipart(parsed, env, { ip, origin })
-          return sendJson(status, json)
+          return sendJson(status, formatApplyResult(json))
         } catch (e) {
           console.error('[hiring-api-dev] apply', e)
           const msg = e instanceof Error ? e.message : ''

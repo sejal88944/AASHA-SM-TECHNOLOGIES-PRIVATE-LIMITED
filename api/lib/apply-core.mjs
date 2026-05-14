@@ -19,6 +19,7 @@ import {
 } from './email-hiring.mjs'
 import { clientIpFromReq, rateLimitConsume } from './rate-limit-ip.mjs'
 import { fieldAll, fieldFirst } from './parse-multipart.mjs'
+import { mongoErrorToClientMessage, stripUndefined } from './mongo-utils.mjs'
 
 const EMPLOYMENT_TYPES = ['Internship', 'Full-time']
 
@@ -114,7 +115,7 @@ export async function submitApplicationFromMultipart(parsed, env, meta = {}) {
 
   try {
     const coll = await getApplicationsCollection(env)
-    const result = await coll.insertOne(doc)
+    const result = await coll.insertOne(stripUndefined(doc))
     const id = result.insertedId.toString()
 
     const origin = (meta.origin || env.VITE_SITE_URL || env.SITE_URL || 'https://smtechsolutions.in').replace(/\/$/, '')
@@ -147,10 +148,21 @@ export async function submitApplicationFromMultipart(parsed, env, meta = {}) {
       console.error('[apply] email notify', e?.message || e)
     }
 
-    return { status: 200, json: { ok: true, id } }
+    return { status: 200, json: { ok: true, id, message: 'Application submitted successfully.' } }
   } catch (e) {
-    console.error('[apply]', e?.message || e)
-    return { status: 500, json: { ok: false, error: 'Could not save application. Please try again later.' } }
+    console.error('[apply] insert failed', e instanceof Error ? e.message : e)
+    console.error('[apply] insert stack', e instanceof Error ? e.stack : '')
+    const clientMsg = mongoErrorToClientMessage(e)
+    return {
+      status: 500,
+      json: {
+        ok: false,
+        success: false,
+        error: clientMsg,
+        message: 'Application submission failed',
+        code: 'INSERT_FAILED',
+      },
+    }
   }
 }
 

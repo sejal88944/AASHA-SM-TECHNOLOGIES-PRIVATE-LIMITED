@@ -1,7 +1,4 @@
-import { MongoClient } from 'mongodb'
-
-/** Reuse client across warm Vercel invocations and long Vite dev sessions */
-const globalForMongo = globalThis
+import { getMongoClient } from './lib/mongo-shared.mjs'
 
 /**
  * @param {unknown} body
@@ -80,12 +77,8 @@ export async function executeContactForm(body, env) {
 }
 
 async function saveContactToMongo(uri, doc, collectionName) {
-  if (!globalForMongo._mongoClient) {
-    globalForMongo._mongoClient = new MongoClient(uri)
-    await globalForMongo._mongoClient.connect()
-  }
-  const db = globalForMongo._mongoClient.db()
-  await db.collection(collectionName).insertOne(doc)
+  const client = await getMongoClient(uri)
+  await client.db().collection(collectionName).insertOne(doc)
 }
 
 function isEmail(value) {

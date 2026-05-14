@@ -37,9 +37,9 @@ export function ApplicationForm() {
     setSubmitting(true)
     try {
       const res = await fetch(endpoint, { method: 'POST', body: fd })
-      const data = (await res.json().catch(() => null)) as { ok?: boolean; error?: string; id?: string } | null
+      const data = (await res.json().catch(() => null)) as { ok?: boolean; error?: string; message?: string; id?: string } | null
       if (!res.ok || !data?.ok) {
-        throw new Error(data?.error || `Request failed (${res.status})`)
+        throw new Error(data?.error || data?.message || `Request failed (${res.status})`)
       }
       setToast({
         kind: 'success',

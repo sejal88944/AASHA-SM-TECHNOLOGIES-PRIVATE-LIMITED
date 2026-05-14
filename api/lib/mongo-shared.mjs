@@ -2,6 +2,14 @@ import { MongoClient } from 'mongodb'
 
 const globalForMongo = globalThis
 
+/** Serverless-friendly driver settings (small pool, bounded timeouts). */
+const CLIENT_OPTIONS = {
+  maxPoolSize: 10,
+  minPoolSize: 0,
+  serverSelectionTimeoutMS: 15000,
+  socketTimeoutMS: 45000,
+}
+
 /**
  * @param {string} uri
  * @returns {string | undefined}
@@ -26,12 +34,22 @@ export function resolveDbName(env) {
 }
 
 /**
- * @param {NodeJS.ProcessEnv} env
+ * Shared MongoClient for Atlas (cached on `globalThis` across warm Vercel invocations).
+ * @param {string} uri
  */
 export async function getMongoClient(uri) {
   if (!globalForMongo._mongoClient) {
-    globalForMongo._mongoClient = new MongoClient(uri)
-    await globalForMongo._mongoClient.connect()
+    const client = new MongoClient(uri, CLIENT_OPTIONS)
+    try {
+      await client.connect()
+      globalForMongo._mongoClient = client
+      console.log('[mongodb] client connected (applications/contact pool)')
+    } catch (e) {
+      console.error('[mongodb] connect failed', e instanceof Error ? e.message : e)
+      console.error('[mongodb] stack', e instanceof Error ? e.stack : '')
+      globalForMongo._mongoClient = undefined
+      throw e
+    }
   }
   return globalForMongo._mongoClient
 }

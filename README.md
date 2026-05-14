@@ -79,7 +79,7 @@ export default defineConfig([
 - **Admin dashboard:** `/admin/hiring` (requires `HIRING_ADMIN_SECRET` as Bearer token; stored only in session until you lock).
 - **Vercel:** `api/apply.mjs` uses the Web **`fetch(request)`** handler and **`request.formData()`** so `multipart/form-data` is not broken by legacy Node body helpers on the platform. Other hiring routes remain as `api/applications.mjs` and `api/application/...`.
 - **Local dev:** Vite serves the same routes via `scripts/hiring-vite-middleware.mjs` (no separate process).
-- **Standalone Node:** `npm run hiring-server` runs `server/hiring-server.mjs` (Express + Multer) on port `HIRING_SERVER_PORT` or `5050`.
+- **Checklist:** see `docs/VERCEL_APPLY_CHECKLIST.md` (Atlas IP allowlist, env vars, logs).
 
 ### Environment variables
 
