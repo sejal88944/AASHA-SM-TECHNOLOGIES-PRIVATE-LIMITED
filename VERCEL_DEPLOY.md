@@ -16,15 +16,18 @@ Set these in the Vercel project settings (Production environment):
 - `SITE_URL`: canonical origin for `scripts/generate-seo-files.mjs` and SEO defaults (repo default: **`https://smtechsolutions.in`**). If you publish on **`https://www.smtechsolutions.in`**, set both env vars to that and redirect apex ↔ www with a single canonical.
 - `VITE_SITE_URL`: same value as `SITE_URL`, exposed to the client at build time for canonical URLs and JSON-LD (Vite embeds `VITE_*` variables)
 
-Optional:
+Contact form delivery (configure at least one in Production):
 
 - **`MONGODB_URI`**: MongoDB Atlas connection string (same as `h:\sejal pvt\backend\.env`). When set, `POST /api/contact` saves each lead into database **`carbook`** (from URI path), collection **`sejal_contacts`** (override with `MONGODB_CONTACTS_COLLECTION` if needed).
+- `CONTACT_WEBHOOK_URL`: if set, `api/contact.mjs` POSTs JSON payloads to your automation. When both MongoDB and the webhook are configured, the request is accepted after either delivery sink succeeds.
+
+Optional:
+
 - **`MONGODB_CONTACTS_COLLECTION`**: defaults to `sejal_contacts`.
 - **`OFFICE_ADDRESS`**, **`OFFICE_MAPS_URL`**: optional fields stored on each document (same idea as the Express backend).
-- `CONTACT_WEBHOOK_URL`: if set, `api/contact.mjs` also POSTs JSON payloads to your automation (in addition to MongoDB when `MONGODB_URI` is set).
 - `VITE_CONTACT_ENDPOINT`: override the browser POST target (defaults to `/api/contact`).
 
-Local note: `npm run dev` (Vite only) does **not** run `api/contact.mjs`. To test Mongo saves locally, use **`vercel dev`** or deploy to Vercel and submit the form there.
+Local note: `npm run dev` serves `POST /api/contact` with the same shared contact logic. Set `MONGODB_URI` or `CONTACT_WEBHOOK_URL` in `.env` before submitting test enquiries.
 
 ## Build command
 

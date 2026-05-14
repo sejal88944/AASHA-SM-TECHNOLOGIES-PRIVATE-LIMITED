@@ -40,6 +40,17 @@ export async function executeContactForm(body, env) {
   }
 
   const uri = env.MONGODB_URI?.trim()
+  const webhookUrl = env.CONTACT_WEBHOOK_URL?.trim()
+  if (!uri && !webhookUrl) {
+    console.error('[contact] no delivery sink configured')
+    return {
+      status: 503,
+      json: { ok: false, error: 'Contact form is not configured. Please email us directly.' },
+    }
+  }
+
+  let savedToMongo = false
+  let mongoError = null
   if (uri) {
     try {
       await saveContactToMongo(uri, {
@@ -56,24 +67,41 @@ export async function executeContactForm(body, env) {
         createdAt: new Date(),
         updatedAt: new Date(),
       }, env.MONGODB_CONTACTS_COLLECTION?.trim() || 'sejal_contacts')
+      savedToMongo = true
     } catch (err) {
+      mongoError = err
       console.error('[contact] mongodb', err?.message || err)
-      return { status: 500, json: { ok: false, error: 'Could not save message. Try again later.' } }
     }
   }
 
-  const webhookUrl = env.CONTACT_WEBHOOK_URL?.trim()
+  let sentToWebhook = false
+  let webhookError = null
   if (webhookUrl) {
-    const r = await fetch(webhookUrl, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(payload),
-    })
-    if (!r.ok) {
-      return { status: 502, json: { ok: false, error: 'Downstream webhook failed' } }
+    try {
+      const r = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      if (!r.ok) {
+        throw new Error(`status ${r.status}`)
+      }
+      sentToWebhook = true
+    } catch (err) {
+      webhookError = err
+      console.error('[contact] webhook', err?.message || err)
     }
-  } else if (!uri) {
-    console.log('[contact]', JSON.stringify(payload))
+  }
+
+  if (savedToMongo || sentToWebhook) {
+    return { status: 200, json: { ok: true } }
+  }
+
+  if (mongoError) {
+    return { status: 500, json: { ok: false, error: 'Could not save message. Try again later.' } }
+  }
+  if (webhookError) {
+    return { status: 502, json: { ok: false, error: 'Downstream webhook failed' } }
   }
 
   return { status: 200, json: { ok: true } }
