@@ -12,6 +12,7 @@
     font-family: theme('fontFamily.sans');
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
   }
 
   :focus-visible {

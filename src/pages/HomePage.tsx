@@ -5,6 +5,7 @@ import type { FaqItem } from '../data/schema'
 import { breadcrumbSchema, faqSchema, localBusinessSchema, organizationSchema, websiteSchema } from '../data/schema'
 import { ASSETS, COMPANY } from '../data/company'
 import { services } from '../data/servicesContent'
+import { SEO_LANDING_PAGES } from '../data/seoLandings'
 
 const homeFaqs: FaqItem[] = [
   {
@@ -42,7 +43,7 @@ export function HomePage() {
     <>
       <Seo
         title="IT Company in Pune | Website Development, SMS, WhatsApp, APIs & CRM — AASHA-SM Technologies"
-        description="AASHA-SM TECHNOLOGIES PRIVATE LIMITED is an IT company in Pune delivering website development company India outcomes, SMS automation India, WhatsApp marketing services India, API integration services India, and CRM software development India—built for speed, SEO, and measurable leads."
+        description="AASHA-SM TECHNOLOGIES PRIVATE LIMITED is a Pune, Maharashtra–based IT company delivering websites, SMS and WhatsApp automation, API integrations, CRM implementations, and mobile apps for teams across India—with milestone delivery, structured data, and CRM-ready lead capture."
         canonicalPath="/"
         jsonLd={jsonLd}
         keywords={[
@@ -65,7 +66,7 @@ export function HomePage() {
         </div>
 
         <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:py-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:py-24">
-          <div>
+          <div className="min-w-0">
             <p className="text-sm font-semibold text-cyan-200">Based in Pune · Serving teams across India</p>
             <h1 className="mt-4 max-w-4xl text-3xl font-semibold tracking-tight sm:text-5xl">
               Software, integrations, and customer journeys—built for speed you can operate
@@ -120,7 +121,7 @@ export function HomePage() {
             </dl>
           </div>
 
-          <div className="flex justify-center lg:justify-end">
+          <div className="flex min-w-0 justify-center lg:justify-end">
             <div className="relative w-full max-w-sm rounded-2xl border border-white/15 bg-white/5 p-6 shadow-2xl backdrop-blur">
               <picture>
                 <source srcSet={ASSETS.logoWebp} type="image/webp" />
@@ -165,6 +166,29 @@ export function HomePage() {
               </div>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="border-t border-slate-200 bg-white py-14">
+        <div className="mx-auto max-w-7xl px-4">
+          <h2 className="text-2xl font-semibold tracking-tight text-slate-900">Guides for India & Pune search intent</h2>
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-600">
+            Deep pages for buyers who search by geography and service (for example website development Pune or SMS automation India).
+            Each guide links back to the main service hub and related capabilities.
+          </p>
+          <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {SEO_LANDING_PAGES.map((p) => (
+              <li key={p.path}>
+                <Link
+                  className="block rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm font-semibold text-slate-900 hover:border-slate-300 hover:bg-white"
+                  to={p.path}
+                >
+                  {p.shortNavTitle}
+                  <span className="mt-1 block text-xs font-normal text-slate-600">Long-form guide + FAQs</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -300,7 +324,7 @@ export function HomePage() {
               className="h-72 w-full"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps?q=Pune%2C%20Maharashtra%2C%20India&output=embed"
+              src={COMPANY.mapsEmbedUrl}
             />
           </div>
         </div>

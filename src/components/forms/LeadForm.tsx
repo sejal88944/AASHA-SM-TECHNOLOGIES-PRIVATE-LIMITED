@@ -48,7 +48,7 @@ export function LeadForm({ defaultInterest = 'General inquiry', variant = 'full'
   }
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm">
+    <div className="max-w-full rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm">
       <div className="flex items-start justify-between gap-4">
         <div>
           <h3 className="text-lg font-semibold tracking-tight text-slate-900">Request Quote</h3>

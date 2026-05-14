@@ -26,6 +26,9 @@ export const COMPANY = {
     longitude: 73.8567,
   },
   hours: ['Mo-Fr 09:30-19:00', 'Sa 10:00-14:00'],
+  /** Google Maps embed (no API key) — Pune / Maharashtra service area */
+  mapsEmbedUrl:
+    'https://maps.google.com/maps?q=Pune%2C+Maharashtra%2C+India&hl=en&z=11&output=embed',
 } as const
 
 /** Resolved asset URLs (Vite — always emitted under /assets/ in dist). */

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Seo } from '../components/seo/Seo'
 import { services } from '../data/servicesContent'
+import { SEO_LANDING_PAGES } from '../data/seoLandings'
 import { ASSETS, COMPANY } from '../data/company'
 import { breadcrumbSchema, organizationSchema, websiteSchema } from '../data/schema'
 
@@ -44,6 +45,17 @@ export function ServicesPage() {
                 Messaging depends on APIs. APIs depend on clean data in your CRM and finance tools. Websites should turn that story
                 into qualified conversations—without brittle manual work in between.
               </p>
+              <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-4 text-sm text-slate-700">
+                <span className="font-semibold text-slate-900">India & Pune guides:</span>{' '}
+                {SEO_LANDING_PAGES.map((p, i) => (
+                  <span key={p.path}>
+                    {i > 0 ? ' · ' : ' '}
+                    <Link className="font-semibold text-slate-900 hover:underline" to={p.path}>
+                      {p.shortNavTitle}
+                    </Link>
+                  </span>
+                ))}
+              </div>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link
                   className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800"

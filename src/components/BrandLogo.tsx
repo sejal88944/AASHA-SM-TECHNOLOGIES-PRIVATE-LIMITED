@@ -10,8 +10,8 @@ export function BrandLogo({
 }) {
   const shell =
     variant === 'header'
-      ? 'h-10 w-[min(15rem,46vw)] shrink-0 rounded-lg border border-slate-200/90 bg-white px-1.5 py-0.5 sm:w-60'
-      : 'h-11 w-full max-w-[min(240px,100%)] shrink-0 rounded-lg border border-slate-700 bg-white px-2 py-0.5'
+      ? 'h-10 w-[min(15rem,calc(100vw-7rem))] shrink-0 rounded-lg border border-slate-200/90 bg-white px-1.5 py-0.5 sm:w-60'
+      : 'h-11 w-full max-w-full shrink-0 self-start rounded-lg border border-slate-700 bg-white px-2 py-0.5 xl:max-w-[min(240px,100%)]'
 
   return (
     <picture className={`block ${shell}`}>

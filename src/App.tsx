@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { Layout } from './components/layout/Layout'
 import { WhatsAppFloat } from './components/cta/WhatsAppFloat'
+import { SEO_LANDING_PATHS } from './data/seoLandings'
 
 const HomePage = lazy(async () => {
   const m = await import('./pages/HomePage')
@@ -35,6 +36,10 @@ const NotFoundPage = lazy(async () => {
   const m = await import('./pages/NotFoundPage')
   return { default: m.NotFoundPage }
 })
+const SeoLandingPage = lazy(async () => {
+  const m = await import('./pages/SeoLandingPage')
+  return { default: m.SeoLandingPage }
+})
 
 function RouteFallback() {
   return (
@@ -57,6 +62,9 @@ export default function App() {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/blog" element={<BlogIndexPage />} />
             <Route path="/blog/:slug" element={<BlogPostPage />} />
+            {SEO_LANDING_PATHS.map((p) => (
+              <Route key={p} path={p} element={<SeoLandingPage />} />
+            ))}
             <Route path="/home" element={<Navigate to="/" replace />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>

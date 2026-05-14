@@ -10,13 +10,13 @@ export function WhatsAppFloat() {
   return (
     <a
       href={href}
-      className="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full bg-emerald-600 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-900/20 hover:bg-emerald-500"
-      rel="noreferrer"
+      className="fixed bottom-4 right-4 z-50 inline-flex max-w-[calc(100vw-1.25rem)] items-center gap-2 rounded-full bg-emerald-600 px-3 py-2.5 text-xs font-semibold text-white shadow-lg shadow-emerald-900/20 hover:bg-emerald-500 sm:bottom-5 sm:right-5 sm:px-4 sm:py-3 sm:text-sm"
+      rel="noopener noreferrer"
       target="_blank"
       aria-label="Chat on WhatsApp"
     >
       <span aria-hidden>💬</span>
-      WhatsApp
+      <span className="truncate sm:max-w-none">WhatsApp</span>
     </a>
   )
 }

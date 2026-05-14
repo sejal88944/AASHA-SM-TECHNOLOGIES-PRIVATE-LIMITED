@@ -4,6 +4,7 @@ import { LeadForm } from '../components/forms/LeadForm'
 import { FaqSection } from '../components/sections/FaqSection'
 import { breadcrumbSchema, faqSchema, organizationSchema, serviceSchema, websiteSchema } from '../data/schema'
 import { getServiceBySlug, services } from '../data/servicesContent'
+import { getSeoLandingForServiceSlug } from '../data/seoLandings'
 
 export function ServiceDetailPage() {
   const { slug } = useParams()
@@ -12,6 +13,8 @@ export function ServiceDetailPage() {
   if (!service) {
     return <Navigate to="/services" replace />
   }
+
+  const seoGuidePath = getSeoLandingForServiceSlug(service.slug)
 
   const jsonLd = [
     organizationSchema(),
@@ -68,7 +71,7 @@ export function ServiceDetailPage() {
 
       <section className="mx-auto max-w-7xl px-4 py-12">
         <div className="grid gap-10 lg:grid-cols-3 lg:items-start">
-          <div className="lg:col-span-2">
+          <div className="min-w-0 lg:col-span-2">
             {service.intro.map((p, idx) => (
               <p key={idx} className="text-sm leading-relaxed text-slate-700 sm:text-base">
                 {p}
@@ -116,9 +119,22 @@ export function ServiceDetailPage() {
                 </Link>
               </div>
             </div>
+
+            {seoGuidePath ? (
+              <div className="mt-6 rounded-2xl border border-cyan-200 bg-cyan-50/60 p-6">
+                <h2 className="text-lg font-semibold text-slate-900">Location & keyword guide</h2>
+                <p className="mt-2 text-sm text-slate-700">
+                  Long-form guide for buyers searching by geography and service intent—linked from this service hub for clearer internal
+                  discovery.
+                </p>
+                <Link className="mt-3 inline-flex text-sm font-semibold text-cyan-800 hover:underline" to={seoGuidePath}>
+                  Open SEO guide →
+                </Link>
+              </div>
+            ) : null}
           </div>
 
-          <div className="lg:sticky lg:top-24">
+          <div className="min-w-0 lg:sticky lg:top-24">
             <LeadForm defaultInterest={`Service: ${service.shortTitle}`} />
           </div>
         </div>

@@ -1,3 +1,5 @@
+import { SEO_LANDING_PATHS } from './seoLandings'
+
 /** All indexable paths for sitemap generation (no trailing slash). */
 export const SITEMAP_PATHS: string[] = [
   '/',
@@ -11,6 +13,7 @@ export const SITEMAP_PATHS: string[] = [
   '/services/crm-erp-software',
   '/services/mobile-app-development',
   '/services/whatsapp-marketing',
+  ...SEO_LANDING_PATHS,
   '/blog/website-development-cost-india',
   '/blog/sms-automation-compliance-india',
   '/blog/api-integration-playbook',

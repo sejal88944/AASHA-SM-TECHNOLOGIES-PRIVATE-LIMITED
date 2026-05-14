@@ -12,6 +12,12 @@ const PATHS = [
   '/services/crm-erp-software',
   '/services/mobile-app-development',
   '/services/whatsapp-marketing',
+  '/website-development-pune',
+  '/sms-automation-india',
+  '/api-integration-services',
+  '/crm-software-development-india',
+  '/mobile-app-development-pune',
+  '/whatsapp-marketing-india',
   '/blog/website-development-cost-india',
   '/blog/sms-automation-compliance-india',
   '/blog/api-integration-playbook',
@@ -23,7 +29,23 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 ${PATHS.map((p) => {
   const loc = `${SITE_URL}${p}`
   const changefreq = p.startsWith('/blog') ? 'weekly' : 'monthly'
-  const priority = p === '/' ? '1.0' : p.startsWith('/services/') ? '0.9' : p.startsWith('/blog/') ? '0.8' : '0.85'
+  const isSeoLanding =
+    p === '/website-development-pune' ||
+    p === '/sms-automation-india' ||
+    p === '/api-integration-services' ||
+    p === '/crm-software-development-india' ||
+    p === '/mobile-app-development-pune' ||
+    p === '/whatsapp-marketing-india'
+  const priority =
+    p === '/'
+      ? '1.0'
+      : p.startsWith('/services/')
+        ? '0.9'
+        : isSeoLanding
+          ? '0.9'
+          : p.startsWith('/blog/')
+            ? '0.8'
+            : '0.85'
   return `  <url>
     <loc>${loc}</loc>
     <changefreq>${changefreq}</changefreq>

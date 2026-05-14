@@ -20,6 +20,17 @@ export function organizationSchema() {
     foundingDate: String(COMPANY.foundingYear),
     areaServed: ['IN', 'Maharashtra', 'Pune'],
     sameAs: [COMPANY.linkedinUrl],
+    description:
+      'AASHA-SM TECHNOLOGIES PRIVATE LIMITED delivers website development, SMS automation, WhatsApp marketing, API integration, CRM software, and mobile app development for teams in Pune, Maharashtra, and across India.',
+    knowsAbout: [
+      'Website development',
+      'SMS automation',
+      'WhatsApp Business API',
+      'API integration',
+      'CRM software',
+      'Mobile app development',
+      'Business automation',
+    ],
   }
 }
 
@@ -36,6 +47,22 @@ export function websiteSchema() {
   }
 }
 
+export function webPageSchema(input: { name: string; description: string; path: string }) {
+  const url = siteOrigin()
+  const pageUrl = `${url}${input.path.startsWith('/') ? input.path : `/${input.path}`}`
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: input.name,
+    description: input.description,
+    isPartOf: { '@id': `${url}/#website` },
+    about: { '@id': `${url}/#organization` },
+    inLanguage: 'en-IN',
+  }
+}
+
 export function localBusinessSchema() {
   const url = siteOrigin()
   return {
@@ -48,6 +75,9 @@ export function localBusinessSchema() {
     telephone: COMPANY.phoneE164,
     email: COMPANY.email,
     priceRange: '₹₹',
+    description:
+      'IT services company based in Pune, Maharashtra: websites, SMS and WhatsApp automation, API integrations, CRM implementations, and mobile apps — serving clients across India.',
+    hasMap: COMPANY.mapsEmbedUrl,
     address: {
       '@type': 'PostalAddress',
       streetAddress: COMPANY.streetAddress,

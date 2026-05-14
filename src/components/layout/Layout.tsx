@@ -1,6 +1,7 @@
 import { Link, NavLink, Outlet } from 'react-router-dom'
 import { BrandLogo } from '../BrandLogo'
 import { COMPANY, SITE } from '../../data/company'
+import { SEO_LANDING_PAGES } from '../../data/seoLandings'
 import { services } from '../../data/servicesContent'
 import { blogPosts } from '../../data/blogPosts'
 
@@ -14,7 +15,7 @@ function cx(isActive: boolean): string {
 export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/80 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-3 gap-y-2 px-3 py-3 sm:gap-4 sm:px-4">
         <Link to="/" className="flex min-w-0 shrink-0 items-center">
           <BrandLogo variant="header" loading="eager" />
           <span className="sr-only">
@@ -68,7 +69,7 @@ function MobileNav() {
       <summary className="list-none rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-900">
         Menu
       </summary>
-      <div className="absolute right-0 mt-2 w-72 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg">
+      <div className="absolute right-0 z-50 mt-2 w-[min(18rem,calc(100vw-1.5rem))] max-w-[calc(100vw-1.5rem)] overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg">
         <div className="flex flex-col p-2">
           <NavLink to="/" className={({ isActive }) => `${cx(isActive)}`} end>
             Home
@@ -117,12 +118,13 @@ export function Footer() {
   return (
     <footer className="border-t border-slate-200 bg-slate-950 text-slate-200">
       <div className="mx-auto max-w-7xl px-4 py-12">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4 [&>div]:min-w-0">
-          <div className="min-w-0">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-3">
+        {/* xl: 4 cols — below that 1 col (mobile/tablet) or 2 cols (md–lg) without squeezing brand+services side by side */}
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-4 [&>div]:min-w-0">
+          <div className="min-w-0 md:col-span-2 xl:col-span-1">
+            <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:gap-3">
               <BrandLogo variant="footer" />
-              <div className="min-w-0 flex-1">
-                <div className="break-words text-sm font-semibold text-white">{COMPANY.legalName}</div>
+              <div className="min-w-0 max-w-full flex-1">
+                <div className="text-pretty text-sm font-semibold leading-snug text-white">{COMPANY.legalName}</div>
                 <p className="mt-3 text-sm leading-relaxed text-slate-300">
                   Websites, automation, APIs, CRM, and mobile apps—delivered with clear milestones and production-grade integrations.
                 </p>
@@ -137,7 +139,7 @@ export function Footer() {
               </div>
               <div className="mt-1">
                 <span className="text-slate-400">Email: </span>
-                <a className="font-medium text-white hover:underline" href={`mailto:${COMPANY.email}`}>
+                <a className="break-all font-medium text-white hover:underline" href={`mailto:${COMPANY.email}`}>
                   {COMPANY.email}
                 </a>
               </div>
@@ -160,7 +162,7 @@ export function Footer() {
             <ul className="mt-3 space-y-2 text-sm">
               {services.map((s) => (
                 <li key={s.slug}>
-                  <Link className="break-words text-slate-300 hover:text-white hover:underline" to={s.path}>
+                  <Link className="text-slate-300 hover:text-white hover:underline" to={s.path}>
                     {s.shortTitle}
                   </Link>
                 </li>
@@ -173,10 +175,7 @@ export function Footer() {
             <ul className="mt-3 space-y-2 text-sm">
               {blogPosts.slice(0, 4).map((p) => (
                 <li key={p.slug}>
-                  <Link
-                    className="break-words text-slate-300 hover:text-white hover:underline"
-                    to={`/blog/${p.slug}`}
-                  >
+                  <Link className="text-pretty text-slate-300 hover:text-white hover:underline" to={`/blog/${p.slug}`}>
                     {p.title}
                   </Link>
                 </li>
@@ -207,10 +206,19 @@ export function Footer() {
         </div>
 
         <div className="mt-10 border-t border-slate-800 pt-6 text-xs text-slate-400">
-          © {new Date().getFullYear()} {COMPANY.legalName}. Pune, Maharashtra—serving clients across India.{' '}
-          <a className="text-cyan-300 hover:underline" href={SITE.defaultOrigin} rel="noopener">
-            smtechsolutions.in
-          </a>
+          <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-x-4 sm:gap-y-2">
+            {SEO_LANDING_PAGES.map((p) => (
+              <Link key={p.path} className="shrink-0 text-slate-300 hover:text-white hover:underline" to={p.path}>
+                {p.shortNavTitle}
+              </Link>
+            ))}
+          </div>
+          <p className="text-pretty leading-relaxed">
+            © {new Date().getFullYear()} {COMPANY.legalName}. Pune, Maharashtra—serving clients across India.{' '}
+            <a className="text-cyan-300 hover:underline" href={SITE.defaultOrigin} rel="noopener">
+              smtechsolutions.in
+            </a>
+          </p>
         </div>
       </div>
     </footer>
@@ -219,7 +227,7 @@ export function Footer() {
 
 export function Layout() {
   return (
-    <div className="min-h-dvh bg-white text-slate-900">
+    <div className="min-h-dvh overflow-x-hidden bg-white text-slate-900">
       <Header />
       <main id="main-content">
         <Outlet />
