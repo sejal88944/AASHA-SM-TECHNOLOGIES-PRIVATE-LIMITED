@@ -13,8 +13,8 @@ This project is a React + Vite + TypeScript single-page application deployed to 
 
 Set these in the Vercel project settings (Production environment):
 
-- `SITE_URL`: canonical origin used by `scripts/generate-seo-files.mjs` during build (example: `https://www.aashasmtechnologies.com`)
-- `VITE_SITE_URL`: same value, exposed to the client at build time for canonical URLs and JSON-LD (Vite embeds `VITE_*` variables)
+- `SITE_URL`: canonical origin used by `scripts/generate-seo-files.mjs` during build (production: `https://www.smtechsolutions.in`, or your apex URL if you standardize on `https://smtechsolutions.in` with redirects)
+- `VITE_SITE_URL`: same value as `SITE_URL`, exposed to the client at build time for canonical URLs and JSON-LD (Vite embeds `VITE_*` variables)
 
 Optional:
 

@@ -32,5 +32,6 @@ export const ASSETS = {
 } as const
 
 export const SITE = {
-  defaultOrigin: 'https://www.aashasmtechnologies.com',
+  /** Canonical origin (no trailing slash). Override with VITE_SITE_URL in Vercel if you use apex-only. */
+  defaultOrigin: 'https://www.smtechsolutions.in',
 } as const
