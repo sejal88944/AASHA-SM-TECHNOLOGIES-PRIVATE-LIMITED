@@ -36,6 +36,18 @@ const NotFoundPage = lazy(async () => {
   const m = await import('./pages/NotFoundPage')
   return { default: m.NotFoundPage }
 })
+const CareersPage = lazy(async () => {
+  const m = await import('./pages/CareersPage')
+  return { default: m.CareersPage }
+})
+const JobsPage = lazy(async () => {
+  const m = await import('./pages/JobsPage')
+  return { default: m.JobsPage }
+})
+const InternshipPage = lazy(async () => {
+  const m = await import('./pages/InternshipPage')
+  return { default: m.InternshipPage }
+})
 const SeoLandingPage = lazy(async () => {
   const m = await import('./pages/SeoLandingPage')
   return { default: m.SeoLandingPage }
@@ -59,6 +71,9 @@ export default function App() {
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/services/:slug" element={<ServiceDetailPage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/careers" element={<CareersPage />} />
+            <Route path="/jobs" element={<JobsPage />} />
+            <Route path="/internship" element={<InternshipPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/blog" element={<BlogIndexPage />} />
             <Route path="/blog/:slug" element={<BlogPostPage />} />
@@ -66,6 +81,7 @@ export default function App() {
               <Route key={p} path={p} element={<SeoLandingPage />} />
             ))}
             <Route path="/home" element={<Navigate to="/" replace />} />
+            <Route path="/job" element={<Navigate to="/jobs" replace />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>

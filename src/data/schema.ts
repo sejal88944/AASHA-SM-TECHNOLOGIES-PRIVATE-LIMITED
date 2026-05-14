@@ -30,6 +30,8 @@ export function organizationSchema() {
       'CRM software',
       'Mobile app development',
       'Business automation',
+      'Software engineering careers',
+      'Internships',
     ],
   }
 }
@@ -118,6 +120,56 @@ export function serviceSchema(input: {
     areaServed: ['India', 'Maharashtra', 'Pune'],
     serviceType: input.category ?? 'Information Technology',
     brand: { '@id': `${url}/#organization` },
+  }
+}
+
+export function jobPostingSchema(input: {
+  title: string
+  description: string
+  identifier: string
+  employmentType: 'INTERN' | 'FULL_TIME' | 'CONTRACTOR' | 'PART_TIME'
+  datePosted: string
+  validThrough?: string
+}) {
+  const url = siteOrigin()
+  const jobUrl = `${url}/jobs#${input.identifier}`
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'JobPosting',
+    title: input.title,
+    description: input.description,
+    identifier: {
+      '@type': 'PropertyValue',
+      name: 'postingId',
+      value: input.identifier,
+    },
+    url: jobUrl,
+    datePosted: input.datePosted,
+    validThrough: input.validThrough,
+    employmentType: input.employmentType,
+    hiringOrganization: {
+      '@type': 'Organization',
+      '@id': `${url}/#organization`,
+      name: COMPANY.legalName,
+      sameAs: COMPANY.linkedinUrl,
+    },
+    jobLocation: {
+      '@type': 'Place',
+      name: `${COMPANY.addressLocality}, ${COMPANY.addressRegion}, India`,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: COMPANY.streetAddress,
+        addressLocality: COMPANY.addressLocality,
+        addressRegion: COMPANY.addressRegion,
+        postalCode: COMPANY.postalCode,
+        addressCountry: COMPANY.addressCountry,
+      },
+    },
+    applicantLocationRequirements: {
+      '@type': 'Country',
+      name: 'India',
+    },
+    directApply: true,
   }
 }
 

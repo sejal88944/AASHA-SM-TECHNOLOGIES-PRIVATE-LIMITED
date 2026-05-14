@@ -352,6 +352,12 @@ export function HomePage() {
                 >
                   Read insights
                 </Link>
+                <Link
+                  className="inline-flex items-center justify-center rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
+                  to="/careers"
+                >
+                  Careers & internships
+                </Link>
               </div>
             </div>
             <LeadForm defaultInterest="Homepage consultation" />

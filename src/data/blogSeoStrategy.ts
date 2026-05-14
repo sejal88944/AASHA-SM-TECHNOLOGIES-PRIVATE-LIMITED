@@ -65,3 +65,17 @@ export const BLOG_TOPIC_IDEAS: string[] = [
   'Google Business Profile alignment with website NAP',
   'Using LinkedIn company updates to amplify new service pages ethically',
 ]
+
+/** Editorial ideas supporting careers / internship SEO (publish as real posts). */
+export const CAREERS_CONTENT_BLOG_IDEAS: string[] = [
+  'Best skills for software developers entering the India job market',
+  'Career opportunities in web development: Pune vs remote-first India teams',
+  'How to start a career in React.js with a credible portfolio',
+  'Full stack development roadmap for students and career switchers',
+  'Benefits of startup internships vs large IT bench models',
+  'Software internship interview prep: Git, HTTP, and debugging basics',
+  'Node.js internship India: what hiring managers actually test',
+  'HR internship Pune: how to stand out without prior corporate experience',
+  'Accounts internship India: skills that pair well with SaaS startups',
+  'From internship to offer: documenting impact for IT companies in Pune',
+]

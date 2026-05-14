@@ -33,6 +33,9 @@ export function Header() {
           <NavLink to="/about" className={({ isActive }) => cx(isActive)}>
             About
           </NavLink>
+          <NavLink to="/careers" className={({ isActive }) => cx(isActive)}>
+            Careers
+          </NavLink>
           <NavLink to="/blog" className={({ isActive }) => cx(isActive)}>
             Blog
           </NavLink>
@@ -87,6 +90,15 @@ function MobileNav() {
           </div>
           <NavLink to="/about" className={({ isActive }) => cx(isActive)}>
             About
+          </NavLink>
+          <NavLink to="/careers" className={({ isActive }) => cx(isActive)}>
+            Careers
+          </NavLink>
+          <NavLink to="/jobs" className={({ isActive }) => cx(isActive)}>
+            Jobs
+          </NavLink>
+          <NavLink to="/internship" className={({ isActive }) => cx(isActive)}>
+            Internship
           </NavLink>
           <NavLink to="/blog" className={({ isActive }) => cx(isActive)}>
             Blog
@@ -206,6 +218,17 @@ export function Footer() {
         </div>
 
         <div className="mt-10 border-t border-slate-800 pt-6 text-xs text-slate-400">
+          <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-x-5 sm:gap-y-2">
+            <Link className="font-medium text-slate-200 hover:text-white hover:underline" to="/careers">
+              Careers
+            </Link>
+            <Link className="text-slate-300 hover:text-white hover:underline" to="/jobs">
+              Jobs
+            </Link>
+            <Link className="text-slate-300 hover:text-white hover:underline" to="/internship">
+              Internship
+            </Link>
+          </div>
           <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-x-4 sm:gap-y-2">
             {SEO_LANDING_PAGES.map((p) => (
               <Link key={p.path} className="shrink-0 text-slate-300 hover:text-white hover:underline" to={p.path}>

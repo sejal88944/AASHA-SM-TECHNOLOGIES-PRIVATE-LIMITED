@@ -6,6 +6,9 @@ const PATHS = [
   '/about',
   '/contact',
   '/blog',
+  '/careers',
+  '/jobs',
+  '/internship',
   '/services/website-development',
   '/services/sms-automation',
   '/services/api-integration',
@@ -36,6 +39,7 @@ ${PATHS.map((p) => {
     p === '/crm-software-development-india' ||
     p === '/mobile-app-development-pune' ||
     p === '/whatsapp-marketing-india'
+  const isCareers = p === '/careers' || p === '/jobs' || p === '/internship'
   const priority =
     p === '/'
       ? '1.0'
@@ -43,9 +47,11 @@ ${PATHS.map((p) => {
         ? '0.9'
         : isSeoLanding
           ? '0.9'
-          : p.startsWith('/blog/')
-            ? '0.8'
-            : '0.85'
+          : isCareers
+            ? '0.88'
+            : p.startsWith('/blog/')
+              ? '0.8'
+              : '0.85'
   return `  <url>
     <loc>${loc}</loc>
     <changefreq>${changefreq}</changefreq>

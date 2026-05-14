@@ -1,11 +1,12 @@
 import type { FaqItem } from '../../data/schema'
 
-export function FaqSection({ title, faqs }: { title: string; faqs: FaqItem[] }) {
+export function FaqSection({ title, faqs, subhead }: { title: string; faqs: FaqItem[]; subhead?: string }) {
   return (
     <section className="mx-auto max-w-7xl px-4 py-14">
       <h2 className="text-2xl font-semibold tracking-tight text-slate-900">{title}</h2>
       <p className="mt-2 max-w-3xl text-sm leading-relaxed text-slate-600">
-        Practical answers for teams evaluating vendors and planning rollouts.
+        {subhead ??
+          'Practical answers for teams evaluating vendors and planning rollouts.'}
       </p>
       <div className="mt-8 divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white">
         {faqs.map((f) => (

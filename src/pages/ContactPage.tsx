@@ -1,3 +1,4 @@
+import { useSearchParams } from 'react-router-dom'
 import { Seo } from '../components/seo/Seo'
 import { LeadForm } from '../components/forms/LeadForm'
 import { ASSETS, COMPANY } from '../data/company'
@@ -23,6 +24,10 @@ const contactFaqs: FaqItem[] = [
 ]
 
 export function ContactPage() {
+  const [searchParams] = useSearchParams()
+  const interestParam = searchParams.get('interest')?.trim()
+  const formInterest = interestParam && interestParam.length > 0 ? interestParam : 'Contact page inquiry'
+
   const jsonLd = [
     organizationSchema(),
     websiteSchema(),
@@ -108,7 +113,7 @@ export function ContactPage() {
             </div>
           </div>
 
-          <LeadForm defaultInterest="Contact page inquiry" />
+          <LeadForm key={formInterest} defaultInterest={formInterest} />
         </div>
 
         <div className="mt-12 divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white">
