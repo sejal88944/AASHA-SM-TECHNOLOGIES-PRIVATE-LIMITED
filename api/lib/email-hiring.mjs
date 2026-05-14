@@ -4,8 +4,13 @@
  */
 export async function sendMailSafe(transporter, opts) {
   if (!transporter) return { sent: false }
-  await transporter.sendMail(opts)
-  return { sent: true }
+  try {
+    await transporter.sendMail(opts)
+    return { sent: true }
+  } catch (e) {
+    console.error('[email]', e?.message || e)
+    return { sent: false }
+  }
 }
 
 /**

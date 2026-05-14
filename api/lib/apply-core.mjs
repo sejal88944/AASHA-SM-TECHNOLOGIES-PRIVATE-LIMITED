@@ -122,25 +122,29 @@ export async function submitApplicationFromMultipart(parsed, env, meta = {}) {
     const fromAddr = env.EMAIL_USER?.trim()
     const adminTo = env.ADMIN_NOTIFY_EMAIL?.trim() || fromAddr
 
-    const transporter = await createMailerAsync(env)
-    if (transporter && fromAddr) {
-      await sendMailSafe(transporter, {
-        from: `"${fromName}" <${fromAddr}>`,
-        to: email,
-        subject: `We received your application — ${position}`,
-        text: `Hi ${fullName},\n\nThanks for applying. We will review your profile for ${position}.\n\n— AASHA-SM Technologies`,
-        html: candidateConfirmationHtml({ fullName, position }),
-      })
-
-      if (adminTo) {
+    try {
+      const transporter = await createMailerAsync(env)
+      if (transporter && fromAddr) {
         await sendMailSafe(transporter, {
           from: `"${fromName}" <${fromAddr}>`,
-          to: adminTo,
-          subject: `New application: ${position} — ${fullName}`,
-          text: `New applicant ${fullName} (${email}) for ${position}. ID: ${id}`,
-          html: adminNotificationHtml({ ...doc, _id: id }, origin),
+          to: email,
+          subject: `We received your application — ${position}`,
+          text: `Hi ${fullName},\n\nThanks for applying. We will review your profile for ${position}.\n\n— AASHA-SM Technologies`,
+          html: candidateConfirmationHtml({ fullName, position }),
         })
+
+        if (adminTo) {
+          await sendMailSafe(transporter, {
+            from: `"${fromName}" <${fromAddr}>`,
+            to: adminTo,
+            subject: `New application: ${position} — ${fullName}`,
+            text: `New applicant ${fullName} (${email}) for ${position}. ID: ${id}`,
+            html: adminNotificationHtml({ ...doc, _id: id }, origin),
+          })
+        }
       }
+    } catch (e) {
+      console.error('[apply] email notify', e?.message || e)
     }
 
     return { status: 200, json: { ok: true, id } }
