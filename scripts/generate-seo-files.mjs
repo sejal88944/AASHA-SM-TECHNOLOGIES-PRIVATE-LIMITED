@@ -1,4 +1,4 @@
-const SITE_URL = (process.env.SITE_URL || 'https://www.smtechsolutions.in').replace(/\/$/, '')
+const SITE_URL = (process.env.SITE_URL || 'https://smtechsolutions.in').replace(/\/$/, '')
 
 const PATHS = [
   '/',

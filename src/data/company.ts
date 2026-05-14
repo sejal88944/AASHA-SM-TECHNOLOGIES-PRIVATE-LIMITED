@@ -1,3 +1,7 @@
+import faviconUrl from '../assets/favicon.jpg'
+import logoJpegUrl from '../assets/logo.jpeg'
+import logoWebpUrl from '../assets/logo.webp'
+
 /**
  * NAP: keep address/phone/email aligned with Google Business Profile and invoices.
  */
@@ -14,7 +18,7 @@ export const COMPANY = {
   phoneDisplay: '+91 95299 98320',
   phoneE164: '+919529998320',
   email: 'adminsmtechsolution@gmail.com',
-  linkedinUrl: 'https://www.linkedin.com/company/aashasm-technologies',
+  linkedinUrl: 'https://www.linkedin.com/company/aasha-sm-technologies',
   foundingYear: 2020,
   priceCurrency: 'INR',
   geo: {
@@ -24,14 +28,14 @@ export const COMPANY = {
   hours: ['Mo-Fr 09:30-19:00', 'Sa 10:00-14:00'],
 } as const
 
-/** Static assets in `/public` */
+/** Resolved asset URLs (Vite — always emitted under /assets/ in dist). */
 export const ASSETS = {
-  logoWebp: '/logo.webp',
-  logoJpeg: '/logo.jpeg',
-  faviconJpeg: '/favicon.jpg',
+  logoWebp: logoWebpUrl,
+  logoJpeg: logoJpegUrl,
+  faviconJpeg: faviconUrl,
 } as const
 
 export const SITE = {
-  /** Canonical origin (no trailing slash). Override with VITE_SITE_URL in Vercel if you use apex-only. */
-  defaultOrigin: 'https://www.smtechsolutions.in',
+  /** Canonical origin (no trailing slash). Set VITE_SITE_URL on Vercel; use https://www.smtechsolutions.in if you prefer www + redirect apex → www. */
+  defaultOrigin: 'https://smtechsolutions.in',
 } as const

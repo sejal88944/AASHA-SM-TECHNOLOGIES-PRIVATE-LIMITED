@@ -5,4 +5,4 @@ Allow: /
 # Block common junk paths (tune as needed)
 Disallow: /api/
 
-Sitemap: https://www.smtechsolutions.in/sitemap.xml
+Sitemap: https://smtechsolutions.in/sitemap.xml

@@ -1,77 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.smtechsolutions.in/</loc>
+    <loc>https://smtechsolutions.in/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.smtechsolutions.in/services</loc>
+    <loc>https://smtechsolutions.in/services</loc>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://www.smtechsolutions.in/about</loc>
+    <loc>https://smtechsolutions.in/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://www.smtechsolutions.in/contact</loc>
+    <loc>https://smtechsolutions.in/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://www.smtechsolutions.in/blog</loc>
+    <loc>https://smtechsolutions.in/blog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://www.smtechsolutions.in/services/website-development</loc>
+    <loc>https://smtechsolutions.in/services/website-development</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.smtechsolutions.in/services/sms-automation</loc>
+    <loc>https://smtechsolutions.in/services/sms-automation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.smtechsolutions.in/services/api-integration</loc>
+    <loc>https://smtechsolutions.in/services/api-integration</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.smtechsolutions.in/services/crm-erp-software</loc>
+    <loc>https://smtechsolutions.in/services/crm-erp-software</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.smtechsolutions.in/services/mobile-app-development</loc>
+    <loc>https://smtechsolutions.in/services/mobile-app-development</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.smtechsolutions.in/services/whatsapp-marketing</loc>
+    <loc>https://smtechsolutions.in/services/whatsapp-marketing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.smtechsolutions.in/blog/website-development-cost-india</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.smtechsolutions.in/blog/sms-automation-compliance-india</loc>
+    <loc>https://smtechsolutions.in/blog/website-development-cost-india</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.smtechsolutions.in/blog/api-integration-playbook</loc>
+    <loc>https://smtechsolutions.in/blog/sms-automation-compliance-india</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.smtechsolutions.in/blog/whatsapp-marketing-customer-care</loc>
+    <loc>https://smtechsolutions.in/blog/api-integration-playbook</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smtechsolutions.in/blog/whatsapp-marketing-customer-care</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

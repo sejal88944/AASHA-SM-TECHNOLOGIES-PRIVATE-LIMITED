@@ -84,10 +84,10 @@ export function BlogPostPage() {
         <picture>
           <source srcSet={ASSETS.logoWebp} type="image/webp" />
           <img
-            className="w-full rounded-2xl border border-slate-200 object-contain"
+            className="w-full rounded-2xl border border-slate-200 bg-white object-contain p-2"
             src={ASSETS.logoJpeg}
-            width={640}
-            height={640}
+            width={1024}
+            height={170}
             loading="lazy"
             decoding="async"
             alt={post.heroAlt}

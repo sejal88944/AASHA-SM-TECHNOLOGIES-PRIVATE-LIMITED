@@ -64,8 +64,8 @@ export function ServicesPage() {
                 <source srcSet={ASSETS.logoWebp} type="image/webp" />
                 <img
                   src={ASSETS.logoJpeg}
-                  width={320}
-                  height={320}
+                  width={1024}
+                  height={170}
                   className="mx-auto h-auto w-full max-w-[220px] rounded-lg object-contain"
                   loading="eager"
                   decoding="async"

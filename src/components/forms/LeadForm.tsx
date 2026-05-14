@@ -130,8 +130,14 @@ export function LeadForm({ defaultInterest = 'General inquiry', variant = 'full'
           <p className="text-sm font-medium text-red-700" role="alert">
             {error}{' '}
             <span className="block pt-2 text-slate-600">
-              Tip: on local Vite dev, the contact API is not served—use <span className="font-mono">vercel dev</span> or deploy to
-              Vercel, or email{' '}
+              {import.meta.env.DEV ? (
+                <>
+                  Tip: set <span className="font-mono">MONGODB_URI</span> in <span className="font-mono">.env</span> (restart{' '}
+                  <span className="font-mono">npm run dev</span>) so enquiries save to MongoDB, or email{' '}
+                </>
+              ) : (
+                <>Tip: try again later, or email </>
+              )}
               <a className="font-semibold text-slate-900 hover:underline" href={`mailto:${COMPANY.email}`}>
                 {COMPANY.email}
               </a>

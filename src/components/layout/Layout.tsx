@@ -1,5 +1,6 @@
 import { Link, NavLink, Outlet } from 'react-router-dom'
-import { ASSETS, COMPANY } from '../../data/company'
+import { BrandLogo } from '../BrandLogo'
+import { COMPANY, SITE } from '../../data/company'
 import { services } from '../../data/servicesContent'
 import { blogPosts } from '../../data/blogPosts'
 
@@ -14,23 +15,11 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/80 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3">
-        <Link to="/" className="flex min-w-0 items-center gap-3">
-          <picture>
-            <source srcSet={ASSETS.logoWebp} type="image/webp" />
-            <img
-              src={ASSETS.logoJpeg}
-              width={44}
-              height={44}
-              className="h-11 w-11 shrink-0 rounded-lg object-cover"
-              loading="eager"
-              decoding="async"
-              alt={COMPANY.brandName}
-            />
-          </picture>
-          <div className="flex min-w-0 flex-col">
-            <span className="truncate text-sm font-semibold tracking-tight text-slate-900">{COMPANY.brandName}</span>
-            <span className="truncate text-xs text-slate-600">Pune · IT services & automation</span>
-          </div>
+        <Link to="/" className="flex min-w-0 shrink-0 items-center">
+          <BrandLogo variant="header" loading="eager" />
+          <span className="sr-only">
+            {COMPANY.brandName} — {COMPANY.region}
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
@@ -52,6 +41,14 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <a
+            href={COMPANY.linkedinUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden items-center rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-50 lg:inline-flex"
+          >
+            LinkedIn
+          </a>
           <Link
             to="/contact"
             className="hidden rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 sm:inline-flex"
@@ -96,6 +93,14 @@ function MobileNav() {
           <NavLink to="/contact" className={({ isActive }) => cx(isActive)}>
             Contact
           </NavLink>
+          <a
+            href={COMPANY.linkedinUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cx(false)}
+          >
+            LinkedIn
+          </a>
           <Link
             to="/contact"
             className="mt-2 rounded-lg bg-slate-900 px-3 py-2 text-center text-sm font-semibold text-white hover:bg-slate-800"
@@ -112,23 +117,12 @@ export function Footer() {
   return (
     <footer className="border-t border-slate-200 bg-slate-950 text-slate-200">
       <div className="mx-auto max-w-7xl px-4 py-12">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
-          <div>
-            <div className="flex items-start gap-3">
-              <picture>
-                <source srcSet={ASSETS.logoWebp} type="image/webp" />
-                <img
-                  src={ASSETS.logoJpeg}
-                  width={48}
-                  height={48}
-                  className="h-12 w-12 shrink-0 rounded-lg object-cover opacity-95"
-                  loading="lazy"
-                  decoding="async"
-                  alt={COMPANY.brandName}
-                />
-              </picture>
-              <div>
-                <div className="text-sm font-semibold text-white">{COMPANY.legalName}</div>
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4 [&>div]:min-w-0">
+          <div className="min-w-0">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-3">
+              <BrandLogo variant="footer" />
+              <div className="min-w-0 flex-1">
+                <div className="break-words text-sm font-semibold text-white">{COMPANY.legalName}</div>
                 <p className="mt-3 text-sm leading-relaxed text-slate-300">
                   Websites, automation, APIs, CRM, and mobile apps—delivered with clear milestones and production-grade integrations.
                 </p>
@@ -148,19 +142,25 @@ export function Footer() {
                 </a>
               </div>
               <div className="mt-3">
-                <a className="text-sm font-semibold text-cyan-300 hover:underline" href={COMPANY.linkedinUrl} rel="me">
+                <a
+                  className="text-sm font-semibold text-cyan-300 underline decoration-cyan-400/80 underline-offset-4 hover:text-cyan-200"
+                  href={COMPANY.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={COMPANY.linkedinUrl}
+                >
                   LinkedIn
                 </a>
               </div>
             </div>
           </div>
 
-          <div>
+          <div className="min-w-0">
             <div className="text-sm font-semibold text-white">Services</div>
             <ul className="mt-3 space-y-2 text-sm">
               {services.map((s) => (
                 <li key={s.slug}>
-                  <Link className="text-slate-300 hover:text-white hover:underline" to={s.path}>
+                  <Link className="break-words text-slate-300 hover:text-white hover:underline" to={s.path}>
                     {s.shortTitle}
                   </Link>
                 </li>
@@ -168,12 +168,15 @@ export function Footer() {
             </ul>
           </div>
 
-          <div>
+          <div className="min-w-0">
             <div className="text-sm font-semibold text-white">Insights</div>
             <ul className="mt-3 space-y-2 text-sm">
               {blogPosts.slice(0, 4).map((p) => (
                 <li key={p.slug}>
-                  <Link className="text-slate-300 hover:text-white hover:underline" to={`/blog/${p.slug}`}>
+                  <Link
+                    className="break-words text-slate-300 hover:text-white hover:underline"
+                    to={`/blog/${p.slug}`}
+                  >
                     {p.title}
                   </Link>
                 </li>
@@ -181,7 +184,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div>
+          <div className="min-w-0">
             <div className="text-sm font-semibold text-white">Get started</div>
             <p className="mt-3 text-sm leading-relaxed text-slate-300">
               Tell us what you are building. We will propose milestones, risks, and a practical rollout sequence.
@@ -204,7 +207,10 @@ export function Footer() {
         </div>
 
         <div className="mt-10 border-t border-slate-800 pt-6 text-xs text-slate-400">
-          © {new Date().getFullYear()} {COMPANY.legalName}. Pune, Maharashtra—serving clients across India.
+          © {new Date().getFullYear()} {COMPANY.legalName}. Pune, Maharashtra—serving clients across India.{' '}
+          <a className="text-cyan-300 hover:underline" href={SITE.defaultOrigin} rel="noopener">
+            smtechsolutions.in
+          </a>
         </div>
       </div>
     </footer>

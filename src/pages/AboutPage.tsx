@@ -76,8 +76,9 @@ export function AboutPage() {
               <a
                 className="mt-3 inline-flex text-sm font-semibold text-slate-900 hover:underline"
                 href={COMPANY.linkedinUrl}
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 target="_blank"
+                title={COMPANY.linkedinUrl}
               >
                 LinkedIn →
               </a>
@@ -89,8 +90,8 @@ export function AboutPage() {
               <img
                 className="w-full rounded-2xl border border-slate-200 object-contain shadow-sm"
                 src={ASSETS.logoJpeg}
-                width={640}
-                height={640}
+                width={1024}
+                height={170}
                 loading="lazy"
                 decoding="async"
                 alt={`${COMPANY.brandName} logo`}

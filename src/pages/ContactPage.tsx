@@ -53,14 +53,14 @@ export function ContactPage() {
               WhatsApp is available; phone is best for time-sensitive production issues.
             </p>
           </div>
-          <div className="mx-auto w-full max-w-[200px] shrink-0">
+          <div className="mx-auto w-full max-w-sm shrink-0">
             <picture>
               <source srcSet={ASSETS.logoWebp} type="image/webp" />
               <img
                 src={ASSETS.logoJpeg}
-                width={200}
-                height={200}
-                className="w-full rounded-2xl border border-slate-200 object-contain shadow-sm"
+                width={1024}
+                height={170}
+                className="w-full rounded-2xl border border-slate-200 bg-white object-contain p-2 shadow-sm"
                 loading="eager"
                 decoding="async"
                 alt={`${COMPANY.brandName} logo`}

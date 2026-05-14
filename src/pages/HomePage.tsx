@@ -90,8 +90,9 @@ export function HomePage() {
               <a
                 href={COMPANY.linkedinUrl}
                 className="inline-flex items-center justify-center rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 target="_blank"
+                title={COMPANY.linkedinUrl}
               >
                 LinkedIn
               </a>
@@ -125,8 +126,8 @@ export function HomePage() {
                 <source srcSet={ASSETS.logoWebp} type="image/webp" />
                 <img
                   src={ASSETS.logoJpeg}
-                  width={440}
-                  height={440}
+                  width={1024}
+                  height={170}
                   className="mx-auto h-auto w-full max-w-[280px] rounded-xl object-contain"
                   loading="eager"
                   decoding="async"
