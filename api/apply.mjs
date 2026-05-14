@@ -29,6 +29,11 @@ export default async function handler(req, res) {
     return res.status(status).json(json)
   } catch (e) {
     console.error('[api/apply]', e)
-    return res.status(400).json({ ok: false, error: 'Could not read application form.' })
+    const msg = e instanceof Error ? e.message : ''
+    const clientMsg =
+      msg && (msg.includes('multipart') || msg.includes('Content-Type') || msg.includes('body') || msg.includes('bytes'))
+        ? msg
+        : 'Could not read application form.'
+    return res.status(400).json({ ok: false, error: clientMsg })
   }
 }

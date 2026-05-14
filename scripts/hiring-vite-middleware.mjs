@@ -55,17 +55,27 @@ export function hiringApiDevMiddleware(env) {
       }
 
       if (pathname === '/api/apply' && req.method === 'POST') {
-        const ref = String(req.headers.origin || req.headers.referer || env.SITE_URL || '')
-        let origin = env.SITE_URL || 'https://smtechsolutions.in'
         try {
-          if (ref) origin = new URL(ref).origin
-        } catch {
-          /* ignore */
+          const ref = String(req.headers.origin || req.headers.referer || env.SITE_URL || '')
+          let origin = env.SITE_URL || 'https://smtechsolutions.in'
+          try {
+            if (ref) origin = new URL(ref).origin
+          } catch {
+            /* ignore */
+          }
+          const parsed = await parseMultipartForm(req, { maxFileBytes: MAX_RESUME_BYTES })
+          const ip = clientIpFromReq(req)
+          const { status, json } = await submitApplicationFromMultipart(parsed, env, { ip, origin })
+          return sendJson(status, json)
+        } catch (e) {
+          console.error('[hiring-api-dev] apply', e)
+          const msg = e instanceof Error ? e.message : ''
+          const clientMsg =
+            msg && (msg.includes('multipart') || msg.includes('Content-Type') || msg.includes('body') || msg.includes('bytes'))
+              ? msg
+              : 'Could not read application form.'
+          return sendJson(400, { ok: false, error: clientMsg })
         }
-        const parsed = await parseMultipartForm(req, { maxFileBytes: MAX_RESUME_BYTES })
-        const ip = clientIpFromReq(req)
-        const { status, json } = await submitApplicationFromMultipart(parsed, env, { ip, origin })
-        return sendJson(status, json)
       }
 
       if (pathname === '/api/applications' && req.method === 'OPTIONS') {
