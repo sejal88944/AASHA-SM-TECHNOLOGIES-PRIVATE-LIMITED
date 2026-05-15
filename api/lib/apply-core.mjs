@@ -287,19 +287,46 @@ export async function getApplicationResume(req, env, id) {
   }
   const coll = await getApplicationsCollection(env)
   const doc = await coll.findOne({ _id: oid }, { projection: { resumeData: 1, resumeMime: 1, resumeFileName: 1 } })
-  if (!doc || !doc.resumeData) {
+  const resumeBuffer = doc ? resumeDataToBuffer(doc.resumeData) : null
+  if (!doc || !resumeBuffer) {
     return { status: 404, json: { ok: false, error: 'No resume on file' }, binary: null, headers: {} }
   }
   const name = sanitizeShort(doc.resumeFileName || 'resume', 200) || 'resume'
   return {
     status: 200,
     json: null,
-    binary: doc.resumeData,
+    binary: resumeBuffer,
     headers: {
       'Content-Type': doc.resumeMime || 'application/octet-stream',
       'Content-Disposition': `attachment; filename="${name.replace(/"/g, '')}"`,
     },
   }
+}
+
+/**
+ * MongoDB stores Node Buffers as BSON Binary by default and reads them back as
+ * Binary objects unless promoteBuffers is enabled. Download handlers expect a
+ * Buffer, so normalize the common binary representations in one place.
+ * @param {unknown} value
+ * @returns {Buffer | null}
+ */
+export function resumeDataToBuffer(value) {
+  if (!value) return null
+  if (Buffer.isBuffer(value)) return value
+  if (value instanceof Uint8Array) return Buffer.from(value)
+
+  if (typeof value === 'object') {
+    const binaryLike = /** @type {{ value?: () => unknown; buffer?: unknown }} */ (value)
+    if (typeof binaryLike.value === 'function') {
+      const resolved = binaryLike.value()
+      if (Buffer.isBuffer(resolved)) return resolved
+      if (resolved instanceof Uint8Array) return Buffer.from(resolved)
+    }
+    if (Buffer.isBuffer(binaryLike.buffer)) return binaryLike.buffer
+    if (binaryLike.buffer instanceof Uint8Array) return Buffer.from(binaryLike.buffer)
+  }
+
+  return null
 }
 
 /**
