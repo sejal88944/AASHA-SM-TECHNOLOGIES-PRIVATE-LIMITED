@@ -22,6 +22,25 @@ import { fieldAll, fieldFirst } from './parse-multipart.mjs'
 import { mongoErrorToClientMessage, stripUndefined } from './mongo-utils.mjs'
 
 const EMPLOYMENT_TYPES = ['Internship', 'Full-time']
+const DEFAULT_SITE_ORIGIN = 'https://smtechsolutions.in'
+
+/**
+ * Build links for internal hiring emails from trusted deployment config only.
+ * Request Origin/Referer headers are client-controlled on public apply posts.
+ *
+ * @param {NodeJS.ProcessEnv} env
+ * @param {{ origin?: string }} [_meta]
+ */
+export function resolveTrustedSiteOrigin(env, _meta = {}) {
+  const raw = env.VITE_SITE_URL?.trim() || env.SITE_URL?.trim() || DEFAULT_SITE_ORIGIN
+  try {
+    const url = new URL(raw)
+    if (url.protocol === 'http:' || url.protocol === 'https:') return url.origin
+  } catch {
+    /* ignore invalid deployment URLs */
+  }
+  return DEFAULT_SITE_ORIGIN
+}
 
 /**
  * @typedef {{ fields: Record<string, string | string[]>; files: Array<{ buffer: Buffer; mime: string; originalname: string }> }} ParsedMultipart
@@ -118,7 +137,7 @@ export async function submitApplicationFromMultipart(parsed, env, meta = {}) {
     const result = await coll.insertOne(stripUndefined(doc))
     const id = result.insertedId.toString()
 
-    const origin = (meta.origin || env.VITE_SITE_URL || env.SITE_URL || 'https://smtechsolutions.in').replace(/\/$/, '')
+    const origin = resolveTrustedSiteOrigin(env, meta)
     const fromName = env.EMAIL_FROM_NAME?.trim() || 'AASHA-SM Technologies Hiring'
     const fromAddr = env.EMAIL_USER?.trim()
     const adminTo = env.ADMIN_NOTIFY_EMAIL?.trim() || fromAddr
