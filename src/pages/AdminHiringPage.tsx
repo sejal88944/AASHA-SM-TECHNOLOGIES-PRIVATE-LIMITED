@@ -34,7 +34,9 @@ export function AdminHiringPage() {
   const authHeaders = (): Record<string, string> => (secret ? { Authorization: `Bearer ${secret}` } : {})
 
   const filtersRef = useRef({ q, position, skill, status })
-  filtersRef.current = { q, position, skill, status }
+  useEffect(() => {
+    filtersRef.current = { q, position, skill, status }
+  }, [q, position, skill, status])
 
   const load = useCallback(async () => {
     if (!secret) return
@@ -62,6 +64,8 @@ export function AdminHiringPage() {
   }, [secret])
 
   useEffect(() => {
+    // Loading the protected list is the external synchronization this effect owns.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (secret) void load()
   }, [secret, load])
 
