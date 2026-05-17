@@ -30,7 +30,7 @@ const EMPLOYMENT_TYPES = ['Internship', 'Full-time']
 /**
  * @param {ParsedMultipart} parsed
  * @param {NodeJS.ProcessEnv} env
- * @param {{ ip?: string; origin?: string }} meta
+ * @param {{ ip?: string }} meta
  */
 export async function submitApplicationFromMultipart(parsed, env, meta = {}) {
   const fields = parsed.fields || {}
@@ -118,7 +118,7 @@ export async function submitApplicationFromMultipart(parsed, env, meta = {}) {
     const result = await coll.insertOne(stripUndefined(doc))
     const id = result.insertedId.toString()
 
-    const origin = (meta.origin || env.VITE_SITE_URL || env.SITE_URL || 'https://smtechsolutions.in').replace(/\/$/, '')
+    const origin = trustedSiteOrigin(env)
     const fromName = env.EMAIL_FROM_NAME?.trim() || 'AASHA-SM Technologies Hiring'
     const fromAddr = env.EMAIL_USER?.trim()
     const adminTo = env.ADMIN_NOTIFY_EMAIL?.trim() || fromAddr
@@ -290,16 +290,65 @@ export async function getApplicationResume(req, env, id) {
   if (!doc || !doc.resumeData) {
     return { status: 404, json: { ok: false, error: 'No resume on file' }, binary: null, headers: {} }
   }
+  const resumeBuffer = resumeDataToBuffer(doc.resumeData)
+  if (!resumeBuffer) {
+    console.error('[apply] resume data is not streamable', { id, type: doc.resumeData?.constructor?.name || typeof doc.resumeData })
+    return { status: 500, json: { ok: false, error: 'Resume file is not available.' }, binary: null, headers: {} }
+  }
   const name = sanitizeShort(doc.resumeFileName || 'resume', 200) || 'resume'
   return {
     status: 200,
     json: null,
-    binary: doc.resumeData,
+    binary: resumeBuffer,
     headers: {
       'Content-Type': doc.resumeMime || 'application/octet-stream',
       'Content-Disposition': `attachment; filename="${name.replace(/"/g, '')}"`,
     },
   }
+}
+
+/**
+ * MongoDB returns BSON Binary values by default unless promoteBuffers is enabled.
+ * Normalize the shapes we can safely stream back to authenticated admins.
+ * @param {unknown} value
+ * @returns {Buffer | null}
+ */
+export function resumeDataToBuffer(value) {
+  if (!value) return null
+  if (Buffer.isBuffer(value)) return value
+  if (value instanceof Uint8Array) return Buffer.from(value)
+
+  if (typeof value === 'object') {
+    const maybeBinary = /** @type {{ buffer?: unknown; value?: () => unknown }} */ (value)
+    if (maybeBinary.buffer instanceof Uint8Array) {
+      return Buffer.from(maybeBinary.buffer)
+    }
+    if (typeof maybeBinary.value === 'function') {
+      const raw = maybeBinary.value()
+      if (Buffer.isBuffer(raw)) return raw
+      if (raw instanceof Uint8Array) return Buffer.from(raw)
+    }
+  }
+
+  return null
+}
+
+/**
+ * Admin emails should link only to configured site origins, never caller-supplied
+ * Origin/Referer headers from a public application submission.
+ * @param {NodeJS.ProcessEnv} env
+ */
+export function trustedSiteOrigin(env) {
+  const fallback = 'https://smtechsolutions.in'
+  const raw = env.SITE_URL?.trim() || env.VITE_SITE_URL?.trim() || fallback
+  for (const candidate of [raw, `https://${raw}`]) {
+    try {
+      return new URL(candidate).origin
+    } catch {
+      /* try the next form */
+    }
+  }
+  return fallback
 }
 
 /**

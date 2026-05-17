@@ -57,13 +57,6 @@ export function hiringApiDevMiddleware(env) {
 
       if (pathname === '/api/apply' && req.method === 'POST') {
         try {
-          const ref = String(req.headers.origin || req.headers.referer || env.SITE_URL || '')
-          let origin = env.SITE_URL || 'https://smtechsolutions.in'
-          try {
-            if (ref) origin = new URL(ref).origin
-          } catch {
-            /* ignore */
-          }
           const ct = req.headers['content-type'] || ''
           if (!String(ct).toLowerCase().includes('multipart/form-data')) {
             return sendJson(400, {
@@ -86,7 +79,7 @@ export function hiringApiDevMiddleware(env) {
           const fd = await webReq.formData()
           const parsed = await parsedFromWebFormData(fd, MAX_RESUME_BYTES)
           const ip = clientIpFromReq(req)
-          const { status, json } = await submitApplicationFromMultipart(parsed, env, { ip, origin })
+          const { status, json } = await submitApplicationFromMultipart(parsed, env, { ip })
           return sendJson(status, formatApplyResult(json))
         } catch (e) {
           console.error('[hiring-api-dev] apply', e)

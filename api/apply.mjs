@@ -44,14 +44,6 @@ export default {
       return Response.json(formatApplyResult({ ok: false, error: 'Method not allowed' }), { status: 405 })
     }
 
-    const ref = request.headers.get('origin') || request.headers.get('referer') || process.env.SITE_URL || ''
-    let origin = process.env.SITE_URL || 'https://smtechsolutions.in'
-    try {
-      if (ref) origin = new URL(ref).origin
-    } catch {
-      /* ignore */
-    }
-
     console.log('[api/apply] POST begin', { url: url.slice(0, 120), hasMongoUri: Boolean(process.env.MONGODB_URI?.trim()) })
 
     try {
@@ -71,7 +63,7 @@ export default {
       const fd = await request.formData()
       const parsed = await parsedFromWebFormData(fd, MAX_RESUME_BYTES)
       const ip = clientIpFromRequest(request)
-      const { status, json } = await submitApplicationFromMultipart(parsed, process.env, { ip, origin })
+      const { status, json } = await submitApplicationFromMultipart(parsed, process.env, { ip })
       console.log('[api/apply] POST end', { status, ok: json?.ok === true })
       return Response.json(formatApplyResult(json), { status })
     } catch (e) {
