@@ -58,16 +58,8 @@ app.post('/api/apply', applyLimiter, upload.single('resume'), async (req, res) =
         originalname: req.file.originalname,
       })
     }
-    const ref = String(req.get('origin') || req.get('referer') || process.env.SITE_URL || '')
-    let origin = process.env.SITE_URL || 'https://smtechsolutions.in'
-    try {
-      if (ref) origin = new URL(ref).origin
-    } catch {
-      /* ignore */
-    }
     const { status, json } = await submitApplicationFromMultipart({ fields, files }, process.env, {
       ip: clientIpFromReq(req),
-      origin,
     })
     return res.status(status).json(json)
   } catch (e) {
