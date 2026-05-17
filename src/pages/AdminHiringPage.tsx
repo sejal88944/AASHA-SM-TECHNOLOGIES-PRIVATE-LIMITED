@@ -34,7 +34,10 @@ export function AdminHiringPage() {
   const authHeaders = (): Record<string, string> => (secret ? { Authorization: `Bearer ${secret}` } : {})
 
   const filtersRef = useRef({ q, position, skill, status })
-  filtersRef.current = { q, position, skill, status }
+
+  useEffect(() => {
+    filtersRef.current = { q, position, skill, status }
+  }, [q, position, skill, status])
 
   const load = useCallback(async () => {
     if (!secret) return
@@ -62,7 +65,11 @@ export function AdminHiringPage() {
   }, [secret])
 
   useEffect(() => {
-    if (secret) void load()
+    if (!secret) return undefined
+    const timer = window.setTimeout(() => {
+      void load()
+    }, 0)
+    return () => window.clearTimeout(timer)
   }, [secret, load])
 
   const saveSecret = () => {
