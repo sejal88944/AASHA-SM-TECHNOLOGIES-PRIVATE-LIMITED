@@ -249,6 +249,23 @@ function serializeAppDoc(d) {
 }
 
 /**
+ * MongoDB stores Node Buffers as BSON Binary and returns Binary instances on reads.
+ * Normalize every supported binary shape before handing it to HTTP response code.
+ * @param {unknown} value
+ * @returns {Buffer | null}
+ */
+export function resumeDataToBuffer(value) {
+  if (Buffer.isBuffer(value)) return value
+  if (value instanceof Uint8Array) return Buffer.from(value)
+  if (value && typeof value === 'object' && typeof value.value === 'function') {
+    const out = value.value()
+    if (Buffer.isBuffer(out)) return out
+    if (out instanceof Uint8Array) return Buffer.from(out)
+  }
+  return null
+}
+
+/**
  * @param {import('http').IncomingMessage} req
  * @param {NodeJS.ProcessEnv} env
  * @param {string} id
@@ -287,14 +304,15 @@ export async function getApplicationResume(req, env, id) {
   }
   const coll = await getApplicationsCollection(env)
   const doc = await coll.findOne({ _id: oid }, { projection: { resumeData: 1, resumeMime: 1, resumeFileName: 1 } })
-  if (!doc || !doc.resumeData) {
+  const resumeBuffer = resumeDataToBuffer(doc?.resumeData)
+  if (!doc || !resumeBuffer) {
     return { status: 404, json: { ok: false, error: 'No resume on file' }, binary: null, headers: {} }
   }
   const name = sanitizeShort(doc.resumeFileName || 'resume', 200) || 'resume'
   return {
     status: 200,
     json: null,
-    binary: doc.resumeData,
+    binary: resumeBuffer,
     headers: {
       'Content-Type': doc.resumeMime || 'application/octet-stream',
       'Content-Disposition': `attachment; filename="${name.replace(/"/g, '')}"`,
