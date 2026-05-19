@@ -35,9 +35,10 @@ export function LeadForm({ defaultInterest = 'General inquiry', variant = 'full'
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify(payload),
       })
-      if (!res.ok) {
-        const body = await res.json().catch(() => null)
-        throw new Error(body?.error || `Request failed (${res.status})`)
+      const body = await res.json().catch(() => null)
+      if (!res.ok || body?.ok !== true) {
+        const fallback = res.ok ? 'Contact service did not confirm receipt.' : `Request failed (${res.status})`
+        throw new Error(body?.error || fallback)
       }
       setStatus('success')
       form.reset()

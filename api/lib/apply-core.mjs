@@ -249,6 +249,48 @@ function serializeAppDoc(d) {
 }
 
 /**
+ * MongoDB returns stored Buffers as BSON Binary objects. Normalize the common
+ * shapes back to a Node Buffer before route wrappers decide whether to stream.
+ * @param {unknown} value
+ * @returns {Buffer | null}
+ */
+export function resumeDataToBuffer(value) {
+  if (!value) return null
+  if (Buffer.isBuffer(value)) return value
+  if (value instanceof Uint8Array) return Buffer.from(value)
+  if (value instanceof ArrayBuffer) return Buffer.from(value)
+
+  if (typeof value === 'object') {
+    const maybeBinary = /** @type {{ buffer?: unknown; position?: unknown; value?: unknown }} */ (value)
+    if (typeof maybeBinary.value === 'function') {
+      try {
+        const raw = maybeBinary.value(true)
+        if (Buffer.isBuffer(raw)) return raw
+        if (raw instanceof Uint8Array) return Buffer.from(raw)
+        if (raw instanceof ArrayBuffer) return Buffer.from(raw)
+      } catch {
+        /* fall through to buffer property */
+      }
+    }
+
+    const rawBuffer = maybeBinary.buffer
+    if (Buffer.isBuffer(rawBuffer)) {
+      const position = typeof maybeBinary.position === 'number' ? maybeBinary.position : rawBuffer.length
+      return rawBuffer.subarray(0, position)
+    }
+    if (rawBuffer instanceof Uint8Array) {
+      const position = typeof maybeBinary.position === 'number' ? maybeBinary.position : rawBuffer.byteLength
+      return Buffer.from(rawBuffer.subarray(0, position))
+    }
+    if (rawBuffer instanceof ArrayBuffer) {
+      return Buffer.from(rawBuffer)
+    }
+  }
+
+  return null
+}
+
+/**
  * @param {import('http').IncomingMessage} req
  * @param {NodeJS.ProcessEnv} env
  * @param {string} id
@@ -290,11 +332,15 @@ export async function getApplicationResume(req, env, id) {
   if (!doc || !doc.resumeData) {
     return { status: 404, json: { ok: false, error: 'No resume on file' }, binary: null, headers: {} }
   }
+  const resumeBuffer = resumeDataToBuffer(doc.resumeData)
+  if (!resumeBuffer) {
+    return { status: 500, json: { ok: false, error: 'Resume data could not be read' }, binary: null, headers: {} }
+  }
   const name = sanitizeShort(doc.resumeFileName || 'resume', 200) || 'resume'
   return {
     status: 200,
     json: null,
-    binary: doc.resumeData,
+    binary: resumeBuffer,
     headers: {
       'Content-Type': doc.resumeMime || 'application/octet-stream',
       'Content-Disposition': `attachment; filename="${name.replace(/"/g, '')}"`,
