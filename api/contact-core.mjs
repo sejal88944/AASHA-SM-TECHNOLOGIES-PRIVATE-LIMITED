@@ -70,7 +70,8 @@ export async function executeContactForm(body, env) {
       return { status: 502, json: { ok: false, error: 'Downstream webhook failed' } }
     }
   } else if (!uri) {
-    console.log('[contact]', JSON.stringify(payload))
+    console.error('[contact] no persistence backend configured')
+    return { status: 503, json: { ok: false, error: 'Contact service is not configured. Please email us directly.' } }
   }
 
   return { status: 200, json: { ok: true } }
