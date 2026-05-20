@@ -1,11 +1,12 @@
-import { getMongoClient } from './lib/mongo-shared.mjs'
+import { getMongoClient, resolveDbName } from './lib/mongo-shared.mjs'
 
 /**
  * @param {unknown} body
  * @param {NodeJS.ProcessEnv} env
+ * @param {{ getMongoClient?: typeof getMongoClient }} [deps]
  * @returns {Promise<{ status: number; json: Record<string, unknown> }>}
  */
-export async function executeContactForm(body, env) {
+export async function executeContactForm(body, env, deps = {}) {
   if (!body || typeof body !== 'object') {
     return { status: 400, json: { ok: false, error: 'Invalid JSON body' } }
   }
@@ -37,6 +38,12 @@ export async function executeContactForm(body, env) {
   }
 
   const uri = env.MONGODB_URI?.trim()
+  const webhookUrl = env.CONTACT_WEBHOOK_URL?.trim()
+  if (!uri && !webhookUrl) {
+    console.error('[contact] no persistence backend configured')
+    return { status: 503, json: { ok: false, error: 'Contact form is temporarily unavailable. Try again later.' } }
+  }
+
   if (uri) {
     try {
       await saveContactToMongo(uri, {
@@ -52,14 +59,13 @@ export async function executeContactForm(body, env) {
         page,
         createdAt: new Date(),
         updatedAt: new Date(),
-      }, env.MONGODB_CONTACTS_COLLECTION?.trim() || 'sejal_contacts')
+      }, env, deps.getMongoClient)
     } catch (err) {
       console.error('[contact] mongodb', err?.message || err)
       return { status: 500, json: { ok: false, error: 'Could not save message. Try again later.' } }
     }
   }
 
-  const webhookUrl = env.CONTACT_WEBHOOK_URL?.trim()
   if (webhookUrl) {
     const r = await fetch(webhookUrl, {
       method: 'POST',
@@ -69,16 +75,16 @@ export async function executeContactForm(body, env) {
     if (!r.ok) {
       return { status: 502, json: { ok: false, error: 'Downstream webhook failed' } }
     }
-  } else if (!uri) {
-    console.log('[contact]', JSON.stringify(payload))
   }
 
   return { status: 200, json: { ok: true } }
 }
 
-async function saveContactToMongo(uri, doc, collectionName) {
-  const client = await getMongoClient(uri)
-  await client.db().collection(collectionName).insertOne(doc)
+async function saveContactToMongo(uri, doc, env, getClient = getMongoClient) {
+  const client = await getClient(uri)
+  const dbName = resolveDbName(env)
+  const collectionName = env.MONGODB_CONTACTS_COLLECTION?.trim() || 'sejal_contacts'
+  await client.db(dbName).collection(collectionName).insertOne(doc)
 }
 
 function isEmail(value) {
