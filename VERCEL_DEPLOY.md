@@ -18,7 +18,7 @@ Set these in the Vercel project settings (Production environment):
 
 Optional:
 
-- **`MONGODB_URI`**: MongoDB Atlas connection string (same as `h:\sejal pvt\backend\.env`). When set, `POST /api/contact` saves each lead into database **`carbook`** (from URI path), collection **`sejal_contacts`** (override with `MONGODB_CONTACTS_COLLECTION` if needed).
+- **`MONGODB_URI`**: MongoDB Atlas connection string (same as `h:\sejal pvt\backend\.env`). `POST /api/contact` saves each lead into the configured database (from `DB_NAME` / `MONGODB_DB_NAME`, or the URI path), collection **`sejal_contacts`** (override with `MONGODB_CONTACTS_COLLECTION` if needed). Configure either `MONGODB_URI` or `CONTACT_WEBHOOK_URL` so contact submissions have a durable destination.
 - **`MONGODB_CONTACTS_COLLECTION`**: defaults to `sejal_contacts`.
 - **`OFFICE_ADDRESS`**, **`OFFICE_MAPS_URL`**: optional fields stored on each document (same idea as the Express backend).
 - `CONTACT_WEBHOOK_URL`: if set, `api/contact.mjs` also POSTs JSON payloads to your automation (in addition to MongoDB when `MONGODB_URI` is set).
