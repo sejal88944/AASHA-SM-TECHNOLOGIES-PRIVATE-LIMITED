@@ -1,4 +1,4 @@
-import { getMongoClient } from './lib/mongo-shared.mjs'
+import { getMongoClient, resolveDbName } from './lib/mongo-shared.mjs'
 
 /**
  * @param {unknown} body
@@ -37,9 +37,15 @@ export async function executeContactForm(body, env) {
   }
 
   const uri = env.MONGODB_URI?.trim()
+  const webhookUrl = env.CONTACT_WEBHOOK_URL?.trim()
+  if (!uri && !webhookUrl) {
+    console.error('[contact] no durable contact sink configured')
+    return { status: 503, json: { ok: false, error: 'Contact storage is not configured. Try again later.' } }
+  }
+
   if (uri) {
     try {
-      await saveContactToMongo(uri, {
+      await saveContactToMongo(env, {
         name,
         phone,
         email,
@@ -59,7 +65,6 @@ export async function executeContactForm(body, env) {
     }
   }
 
-  const webhookUrl = env.CONTACT_WEBHOOK_URL?.trim()
   if (webhookUrl) {
     const r = await fetch(webhookUrl, {
       method: 'POST',
@@ -69,16 +74,15 @@ export async function executeContactForm(body, env) {
     if (!r.ok) {
       return { status: 502, json: { ok: false, error: 'Downstream webhook failed' } }
     }
-  } else if (!uri) {
-    console.log('[contact]', JSON.stringify(payload))
   }
 
   return { status: 200, json: { ok: true } }
 }
 
-async function saveContactToMongo(uri, doc, collectionName) {
+async function saveContactToMongo(env, doc, collectionName) {
+  const uri = env.MONGODB_URI?.trim()
   const client = await getMongoClient(uri)
-  await client.db().collection(collectionName).insertOne(doc)
+  await client.db(resolveDbName(env)).collection(collectionName).insertOne(doc)
 }
 
 function isEmail(value) {
