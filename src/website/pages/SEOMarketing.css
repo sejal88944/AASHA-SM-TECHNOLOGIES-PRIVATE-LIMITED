@@ -1,0 +1,24 @@
+﻿/* Enforce Montserrat for everything inside SEO Marketing page wrapper */
+.seo-marketing-page-wrapper,
+.seo-marketing-page-wrapper * {
+    font-family: 'Merriweather', serif !important;
+}
+
+/* Specifically target headings and known classes */
+.seo-marketing-page-wrapper h1,
+.seo-marketing-page-wrapper h2,
+.seo-marketing-page-wrapper h3,
+.seo-marketing-page-wrapper h4,
+.seo-marketing-page-wrapper h5,
+.seo-marketing-page-wrapper h6,
+.seo-marketing-page-wrapper p,
+.seo-marketing-page-wrapper span,
+.seo-marketing-page-wrapper div,
+.seo-marketing-page-wrapper strong,
+.seo-marketing-page-wrapper li,
+.seo-marketing-page-wrapper a,
+.seo-marketing-page-wrapper button {
+    font-family: 'Merriweather', serif !important;
+    font-style: normal !important;
+    /* Remove italics from previous styles */
+}

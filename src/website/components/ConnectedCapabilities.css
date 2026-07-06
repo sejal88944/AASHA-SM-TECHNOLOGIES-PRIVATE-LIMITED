@@ -1,0 +1,394 @@
+﻿/* Full Screen Pinned Section */
+.capabilities-section {
+    position: relative;
+    width: 100%;
+    height: auto;
+    /* Changed from 100vh to auto to remove extra top/bottom space */
+    padding: 150px 0;
+    min-height: 100vh;
+    /* Increased size */
+    background: #fff;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.capabilities-content {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Left Column: The Orbit System */
+.orbit-column {
+    /* Acts as a spacer/holder for the right column's alignment context if needed, 
+       but since orbit is absolute, this just fills space or we let text column expand.
+       Let's keep it to push text column to the right. */
+    flex: 1;
+    /* pointer-events: none; allow click-through to orbit? */
+}
+
+/* Container defining the orbit space */
+.orbit-container {
+    position: absolute;
+    /* Absolute to the SECTION (screen width) */
+    left: 0;
+    top: 50%;
+    width: 900px !important;
+    height: 900px !important;
+    /* Center the circle on the Left Edge: x = -50% */
+    transform: translate(-50%, -50%);
+    will-change: transform;
+    z-index: 10;
+}
+
+/* The SVG Ring/Arc (Decoration) */
+.orbit-svg-track {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* The Rotating Wrapper for Items */
+/* This rotates the whole system of items */
+.orbit-rotator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    will-change: transform;
+    z-index: 10;
+    /* Removed transition to let GSAP handle smooth rotation */
+}
+
+/* Individual Orbit Items */
+/* Placed absolutely via JS trigonometry */
+/* Individual Orbit Items */
+/* Placed absolutely via JS trigonometry */
+.orbit-item {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* Let width/height be auto to fit text bubble */
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Center content */
+    /* Reset transform here, JS adds the translate(x,y) */
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    pointer-events: auto;
+    /* Scroll drives interactivity */
+}
+
+/* Hide the old dot */
+.orbit-dot {
+    display: none;
+}
+
+/* Style the Label as a "Perfect Circle" */
+.orbit-label {
+    font-family: 'Merriweather', serif !important;
+    font-weight: 300 !important;
+    /* Lighter weight */
+    font-style: italic !important;
+    font-size: 28px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* ... rest of properties ... */
+    color: #64748b;
+    cursor: pointer;
+
+    /* Circle Styling */
+    width: 280px;
+    /* Increased size */
+    height: 280px;
+    /* Increased from 110px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 50%;
+    /* Perfect Circle */
+    padding: 10px;
+    /* Internal padding so text doesn't touch edges */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+    /* Text Handling */
+    white-space: normal;
+    /* Allow wrapping */
+    line-height: 1.2;
+
+    transform-origin: center center;
+    transition: all 0.3s ease;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.orbit-video-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mix-blend-mode: multiply;
+    filter: invert(1) brightness(1.5) contrast(1.5);
+    z-index: 1;
+    border-radius: 50%;
+    opacity: 0.6;
+}
+
+/* Active State Styles */
+.orbit-item.active .orbit-label {
+    background: #ffffff !important;
+    /* Logo Green */
+    border-color: #ffffff !important;
+    color: #000000 !important;
+    font-weight: 300 !important;
+    opacity: 1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+/* Focal Point Marker (Optional visual guide for "Right" side) */
+.focal-marker {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    /* Right edge of container */
+    width: 20px;
+    height: 2px;
+    background: var(--primary);
+    transform: translate(-50%, -50%);
+    display: none;
+    /* Hide if we want it implicit */
+}
+
+
+/* Right Column: Static Text */
+.text-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 5%;
+    padding-right: 5%;
+    z-index: 20;
+    background: rgba(255, 255, 255, 0.9);
+    /* backdrop */
+    backdrop-filter: blur(10px);
+}
+
+.text-content-wrapper {
+    max-width: 500px;
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.text-label {
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #64748b;
+    margin-bottom: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.text-indicator-line {
+    width: 30px;
+    height: 2px;
+    background: var(--primary);
+}
+
+.text-heading {
+    font-family: 'Merriweather', serif;
+    /* Updated to Times Ten stack */
+    font-weight: 700;
+    /* Bold */
+    font-style: italic;
+    /* Italic */
+    font-size: 3.5rem;
+    line-height: 1.1;
+    color: var(--secondary);
+    margin-bottom: 24px;
+}
+
+.text-description {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: #475569;
+    margin-bottom: 40px;
+}
+
+.action-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 28px;
+    background: #1e1e1e;
+    color: #fff;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.action-button:hover {
+    background: var(--primary);
+    transform: translateY(-2px);
+}
+
+/* Mobile adjustments */
+@media (max-width: 992px) {
+    .capabilities-content {
+        flex-direction: column-reverse;
+        /* Text on bottom, orbit on top? Or stacked. */
+    }
+
+    .orbit-container {
+        width: 600px;
+        height: 600px;
+        left: 0;
+        transform: translate(-50%, -50%);
+    }
+
+    .text-column {
+        padding: 40px 20px;
+    }
+
+    .text-heading {
+        font-size: 2.5rem;
+    }
+}
+
+/* Mobile Optimization for Orbit Section */
+@media (max-width: 600px) {
+    .capabilities-section {
+        padding: 40px 0;
+        height: auto;
+        min-height: auto;
+        overflow: hidden;
+        display: block;
+        /* Allow natural flow */
+    }
+
+    .capabilities-content {
+        flex-direction: column;
+        display: flex;
+        padding-bottom: 0;
+        height: auto;
+    }
+
+    .text-column {
+        order: 1;
+        padding: 0 20px 20px 20px;
+        /* Reduced padding */
+        text-align: center;
+        align-items: center;
+        width: 100%;
+        background: transparent;
+        backdrop-filter: none;
+        /* Removed blur */
+        z-index: 20;
+        position: relative;
+    }
+
+    .text-heading {
+        font-size: 2rem;
+        /* Adjusted size */
+        margin-bottom: 16px;
+    }
+
+    .text-description {
+        font-size: 1rem;
+        margin-bottom: 24px;
+    }
+
+    .text-label {
+        justify-content: center;
+    }
+
+    .text-indicator-line {
+        display: none;
+    }
+
+    .orbit-label {
+        width: 150px;
+        height: 150px;
+        font-size: 28px;
+        background: rgba(255, 255, 255, 0.95) !important;
+        border: 1px solid #e2e8f0 !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
+        border-radius: 50%;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .orbit-item.active .orbit-label {
+        background: #ffffff !important;
+        border-color: var(--primary) !important;
+        box-shadow: 0 8px 20px rgba(55, 180, 111, 0.2) !important;
+        transform: scale(1.1);
+        z-index: 10;
+    }
+
+    .orbit-column {
+        order: 2;
+        position: relative;
+        width: 100%;
+        height: 320px;
+        /* Constrain height to show approx half circle */
+        overflow: visible;
+        /* Allow points to bleed if needed but focused on top half */
+        margin-top: 30px;
+        margin-bottom: 150px;
+        pointer-events: none;
+    }
+
+    .orbit-container {
+        width: 600px !important;
+        height: 600px !important;
+        position: absolute;
+        top: 0 !important;
+        left: 50% !important;
+        transform: translate(-50%, 0) scale(0.85) !important;
+        /* Larger scale for bigger points */
+        transform-origin: center top;
+    }
+
+    /* Rotate the background arc visually to match Top focus */
+    .orbit-svg-track {
+        transform: translate(-50%, -50%) rotate(-90deg) !important;
+    }
+
+    .orbit-svg-track path {
+        stroke-width: 20px !important;
+        stroke: #FF6B35 !important;
+        /* Orange to match reference, or stick to var(--primary)? Let's try Orange as requested "that type". Actually better stick to green for brand consitency but thicken it. */
+        stroke: var(--primary) !important;
+    }
+}

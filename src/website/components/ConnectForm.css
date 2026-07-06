@@ -1,0 +1,15 @@
+.connect-container {
+    max-width: 1200px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+@media (max-width: 900px) {
+    .connect-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}

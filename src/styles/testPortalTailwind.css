@@ -1,0 +1,10 @@
+/* Tailwind layer for the Internship Selection Test Portal module only.
+   Preflight is disabled in tailwind.config.js so this cannot affect the
+   look of the existing marketing site or admin panel. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.tp-scope, .tp-scope * {
+  font-family: 'Merriweather', serif !important;
+}

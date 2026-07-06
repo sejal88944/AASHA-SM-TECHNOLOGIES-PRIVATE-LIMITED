@@ -1,0 +1,51 @@
+.tech-stack-section {
+    padding: 80px 0;
+    background: #fdfdfd;
+    overflow: hidden;
+}
+
+.tech-header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding: 0 20px;
+}
+
+.tech-marquee {
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.tech-track {
+    display: flex;
+    gap: 60px;
+    padding: 20px 0;
+    white-space: nowrap;
+}
+
+.tech-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    min-width: 120px;
+}
+
+.tech-item img {
+    width: 50px;
+    height: 50px;
+    filter: grayscale(1);
+    transition: all 0.3s ease;
+}
+
+.tech-item:hover img {
+    filter: grayscale(0);
+    transform: scale(1.1);
+}
+
+.tech-item span {
+    font-size: 14px;
+    font-weight: 600;
+    color: #777;
+}

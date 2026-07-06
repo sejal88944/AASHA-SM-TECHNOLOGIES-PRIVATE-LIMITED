@@ -1,0 +1,121 @@
+.google-reviews-section {
+    padding: 50px 5%;
+    background: #050811;
+    /* darkNavy */
+    position: relative;
+    overflow: hidden;
+}
+
+.reviews-bg-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 80% 20%, rgba(242, 101, 34, 0.08) 0%, transparent 50%), radial-gradient(circle at 20% 80%, rgba(242, 101, 34, 0.05) 0%, transparent 50%);
+    z-index: 0;
+}
+
+.reviews-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* Flexbox Layout for Responsiveness */
+.reviews-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: center;
+    justify-content: center;
+}
+
+.reviews-text-content {
+    flex: 1 1 350px;
+    /* Grow, Shrink, Basis */
+    min-width: 300px;
+    max-width: 600px;
+    /* Prevent it getting too wide on HUGE screens */
+}
+
+.review-carousel-container {
+    flex: 1 1 350px;
+    min-width: 300px;
+    max-width: 600px;
+    position: relative;
+    height: 260px;
+    display: flex;
+    align-items: center;
+}
+
+/* Card Styling */
+.review-card {
+    padding: 25px 35px;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Media Query for Mobile specifics */
+@media (max-width: 1100px) {
+    .google-reviews-section {
+        padding: 20px 10px;
+        /* Reduced vertical padding */
+    }
+
+    .reviews-grid {
+        flex-direction: column;
+        gap: 0px;
+        /* Removed gap completely */
+    }
+
+    .reviews-text-content {
+        text-align: center;
+        align-items: center;
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        margin-bottom: 0;
+    }
+
+    .reviews-text-content h2 {
+        font-size: 24px !important;
+        margin-bottom: 5px !important;
+    }
+
+    .review-actions {
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 0;
+        /* Remove explicit margin, rely on grid gap */
+    }
+
+    .review-carousel-container {
+        height: auto !important;
+        min-height: auto;
+        margin-top: -50px;
+        /* Stronger negative margin to remove gap */
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-radius: 20px;
+        padding: 0;
+        min-width: 0;
+    }
+
+    .review-card {
+        padding: 20px 20px;
+        margin: 0;
+        width: 100%;
+    }
+}

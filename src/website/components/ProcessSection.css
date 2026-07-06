@@ -1,0 +1,360 @@
+/* Process Dashboard Timeline Styles */
+.roadmap-section {
+    padding: 40px 0;
+    background: #090d16; /* Deep dark tech theme */
+    position: relative;
+    overflow: hidden;
+    color: #f8fafc;
+}
+
+.roadmap-section * {
+    font-family: 'Merriweather', serif !important;
+    box-sizing: border-box;
+}
+
+/* Ambient Radial Glows */
+.roadmap-bg-glow-1 {
+    position: absolute;
+    top: 15%;
+    left: -10%;
+    width: 40vw;
+    height: 40vw;
+    background: radial-gradient(circle, rgba(242, 101, 34, 0.05) 0%, rgba(242, 101, 34, 0) 70%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.roadmap-bg-glow-2 {
+    position: absolute;
+    bottom: 10%;
+    right: -10%;
+    width: 35vw;
+    height: 35vw;
+    background: radial-gradient(circle, rgba(33, 150, 243, 0.05) 0%, rgba(33, 150, 243, 0) 70%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Header styling */
+.process-header {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 5;
+}
+
+.roadmap-tag-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.roadmap-tag-container .dot {
+    width: 5px;
+    height: 5px;
+    background: #F26522;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #F26522;
+}
+
+.roadmap-tag {
+    font-size: 12px;
+    font-weight: 800;
+    color: #F26522;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 16px;
+    border: 1px solid rgba(242, 101, 34, 0.3);
+    border-radius: 30px;
+    background: rgba(242, 101, 34, 0.05);
+    box-shadow: 0 0 15px rgba(242, 101, 34, 0.1);
+}
+
+.process-header .section-title {
+    font-size: clamp(30px, 4vw, 42px);
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: 15px;
+    letter-spacing: -1px;
+    background: linear-gradient(to right, #ffffff, #94a3b8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.process-header .section-subtitle {
+    font-size: 15px;
+    color: #94a3b8;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* Stepper Dashboard Layout */
+.stepper-dashboard {
+    max-width: 1000px;
+    margin: 0 auto;
+    z-index: 5;
+    position: relative;
+}
+
+/* Tabs Bar */
+.stepper-tabs {
+    display: flex;
+    justify-content: center;
+    background: rgba(15, 23, 42, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 18px;
+    padding: 8px;
+    margin-bottom: 20px;
+    gap: 8px;
+}
+
+.stepper-tab-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 16px 20px;
+    color: #94a3b8;
+    cursor: pointer;
+    border-radius: 12px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    gap: 4px;
+    outline: none;
+}
+
+.stepper-tab-btn:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.stepper-tab-btn.active {
+    color: var(--accent-color);
+    background: var(--accent-color-15);
+}
+
+.tab-num {
+    font-size: 13px;
+    font-weight: 800;
+    opacity: 0.7;
+}
+
+.tab-title {
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.active-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    right: 10%;
+    height: 3px;
+    background: var(--accent-color);
+    border-radius: 3px;
+    box-shadow: 0 0 10px var(--accent-color);
+}
+
+/* Stepper Content Panel */
+.stepper-content-panel {
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 25px 35px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    min-height: 250px;
+}
+
+.stepper-card-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 30px;
+    align-items: center;
+}
+
+/* Left side of card */
+.stepper-card-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.stepper-icon-circle {
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.05);
+}
+
+.step-badge {
+    padding: 4px 12px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.active-step-heading {
+    font-size: 28px;
+    font-weight: 900;
+    color: #ffffff;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.5px;
+}
+
+.active-step-desc {
+    font-size: 14.5px;
+    color: #94a3b8;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Right side of card: Deliverables list */
+.stepper-card-deliverables {
+    background: rgba(9, 13, 22, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    padding: 20px;
+    border-radius: 18px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.deliverables-heading {
+    font-size: 16px;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 20px 0;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.deliverables-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.deliverable-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #cbd5e1;
+    font-size: 14.5px;
+    font-weight: 500;
+}
+
+.check-bullet {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Footer Section */
+.roadmap-footer {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+}
+
+.footer-icon {
+    color: #F26522;
+    filter: drop-shadow(0 0 10px rgba(242, 101, 34, 0.5));
+    animation: bounceSlow 3s infinite ease-in-out;
+}
+
+.roadmap-footer p {
+    font-size: 18px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+    margin: 0;
+}
+
+@keyframes bounceSlow {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 900px) {
+    .stepper-tabs {
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding: 6px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Hide scrollbars firefox */
+    }
+
+    .stepper-tabs::-webkit-scrollbar {
+        display: none; /* Hide scrollbars chrome/safari */
+    }
+
+    .stepper-tab-btn {
+        flex: none;
+        min-width: 140px;
+    }
+
+    .stepper-content-panel {
+        padding: 30px;
+    }
+
+    .stepper-card-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .stepper-card-deliverables {
+        padding: 24px;
+    }
+}
+
+@media (max-width: 600px) {
+    .roadmap-section {
+        padding: 60px 0;
+    }
+
+    .stepper-content-panel {
+        padding: 24px 20px;
+        border-radius: 18px;
+    }
+
+    .active-step-heading {
+        font-size: 22px;
+    }
+
+    .active-step-desc {
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,49 @@
+/* Rich Text Content Styling */
+.rich-text-content {
+    width: 100%;
+    /* Ensure content respects the container width */
+    max-width: 100%;
+    /* Keep overflow visible to avoid scrollbars inside the content unless necessary */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+/* 
+   Aggressive reset for ALL elements inside rich text 
+   This handles nested divs with fixed widths (e.g. from copy-pasting)
+*/
+.rich-text-content * {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Specific overrides for media to ensure they scale */
+.rich-text-content img,
+.rich-text-content video,
+.rich-text-content iframe,
+.rich-text-content svg,
+.rich-text-content table {
+    height: auto !important;
+}
+
+/* Fix for preformatted text or code blocks */
+.rich-text-content pre,
+.rich-text-content code {
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+/* Lists styling */
+.rich-text-content ul,
+.rich-text-content ol {
+    padding-left: 20px;
+    margin-bottom: 1em;
+}
+
+/* Link styling */
+.rich-text-content a {
+    color: var(--primary);
+    text-decoration: underline;
+    word-break: break-all;
+}

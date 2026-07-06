@@ -1,0 +1,24 @@
+﻿/* Enforce Montserrat for everything inside Social Media Marketing page wrapper */
+.social-media-marketing-page-wrapper,
+.social-media-marketing-page-wrapper * {
+    font-family: 'Merriweather', serif !important;
+}
+
+/* Specifically target headings and known classes */
+.social-media-marketing-page-wrapper h1,
+.social-media-marketing-page-wrapper h2,
+.social-media-marketing-page-wrapper h3,
+.social-media-marketing-page-wrapper h4,
+.social-media-marketing-page-wrapper h5,
+.social-media-marketing-page-wrapper h6,
+.social-media-marketing-page-wrapper p,
+.social-media-marketing-page-wrapper span,
+.social-media-marketing-page-wrapper div,
+.social-media-marketing-page-wrapper strong,
+.social-media-marketing-page-wrapper li,
+.social-media-marketing-page-wrapper a,
+.social-media-marketing-page-wrapper button {
+    font-family: 'Merriweather', serif !important;
+    font-style: normal !important;
+    /* Remove italics from previous styles */
+}

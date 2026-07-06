@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+@import './richText.css';
+@import './overflow-fix.css';
+
+* {
+    box-sizing: border-box !important;
+}
+
+html {
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+}
+
+html::-webkit-scrollbar {
+    display: none !important;
+}
+
+html,
+body,
+#root,
+button,
+input,
+textarea,
+select {
+    font-family: 'Merriweather', Georgia, 'Times New Roman', serif;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    position: relative;
+    overflow: visible;
+
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+}
+
+body::-webkit-scrollbar {
+    display: none !important;
+}
+
+#root {
+    width: 100%;
+    overflow: visible;
+}
+
+.highlight-text {
+    font-family: 'Merriweather', Georgia, 'Times New Roman', serif;
+    font-weight: bold;
+    font-style: normal;
+}
+
+:root {
+    /* Brand Colors */
+    --primary: #F26522;
+    --secondary: #2D2D2D;
+    --accent: #E64A19;
+
+    /* Neutral Colors */
+    --bg-color: #FFFFFF;
+    --text-color: #333333;
+    --border-color: #DDDDDD;
+
+    /* Typography */
+    --font-family: 'Merriweather', Georgia, 'Times New Roman', serif;
+}

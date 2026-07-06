@@ -1,0 +1,339 @@
+/* Navbar Container */
+.navbar {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-radius: 100px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    z-index: 1000;
+    box-sizing: border-box;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Merriweather', serif;
+    font-style: normal;
+}
+
+/* Scroll effect: adjust slightly if scroll logic is added, but sticky works natively */
+.navbar:hover {
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.navbar-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.navbar-logo img {
+    height: 40px !important;
+    object-fit: contain;
+    background-color: #ffffff;
+    border: 1.5px solid #111111;
+    border-radius: 6px;
+    padding: 4px 12px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
+}
+
+.navbar-logo:hover img {
+    transform: scale(1.04);
+}
+
+/* Mobile Toggle */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--secondary);
+    padding: 8px;
+    border-radius: 50%;
+    transition: background 0.2s ease;
+}
+
+.mobile-menu-toggle:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+/* Navigation Links Container */
+.navbar-links {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Individual Links */
+.nav-link {
+    text-decoration: none;
+    color: var(--secondary);
+    font-weight: 700;
+    padding: 8px 18px;
+    border-radius: 50px;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    font-family: 'Merriweather', serif;
+    font-style: normal;
+    font-size: 14.5px;
+}
+
+.nav-link:hover {
+    color: var(--primary);
+    background: rgba(242, 101, 34, 0.05);
+}
+
+/* Dropdown Container (Trigger) */
+.dropdown-container {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+/* Dropdown Menu Wrapper */
+.dropdown-wrapper {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: 12px;
+    z-index: 1000;
+    animation: fadeIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -10px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+/* Dropdown Content Box */
+.dropdown-content {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    min-width: 260px;
+    padding: 10px 0;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    overflow: hidden;
+}
+
+/* Dropdown Items */
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: var(--secondary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    transition: all 0.25s ease;
+    border-left: 3px solid transparent;
+    white-space: nowrap;
+    cursor: pointer;
+    font-family: 'Merriweather', serif;
+    font-style: normal;
+}
+
+.dropdown-item:hover {
+    background: rgba(242, 101, 34, 0.04);
+    border-left-color: var(--primary);
+    color: var(--primary);
+    padding-left: 24px;
+}
+
+.dropdown-item img {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* Nested Dropdowns */
+.nested-dropdown-container {
+    position: relative;
+}
+
+.nested-dropdown {
+    position: absolute;
+    right: 100%;
+    top: -5px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    min-width: 250px;
+    padding: 10px 0;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    margin-right: 10px;
+    display: none;
+    z-index: 1001;
+}
+
+/* Show Nested on Hover */
+.nested-dropdown-container:hover .nested-dropdown {
+    display: block;
+    animation: fadeInNested 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeInNested {
+    from {
+        opacity: 0;
+        transform: translateX(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 960px) {
+    .navbar {
+        width: 92%;
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 8px 20px;
+        border-radius: 40px;
+        top: 15px;
+    }
+
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    .navbar-links {
+        position: absolute;
+        top: 120%;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border: 1px solid rgba(226, 232, 240, 0.8);
+        border-radius: 24px;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px 0;
+        gap: 0;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+        max-height: 75vh;
+        overflow-y: auto;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+    }
+
+    .navbar-links.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .nav-link {
+        width: 90%;
+        margin: 0 auto;
+        padding: 14px 20px;
+        border-radius: 12px;
+        justify-content: space-between;
+        box-sizing: border-box;
+    }
+
+    .nav-link:hover {
+        background: rgba(242, 101, 34, 0.04);
+    }
+
+    /* Dropdown Logic Mobile */
+    .dropdown-container {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .dropdown-wrapper {
+        position: static;
+        width: 100%;
+        transform: none;
+        padding-top: 0;
+        animation: none;
+    }
+
+    .dropdown-content {
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+        background: #f8fafc;
+        width: 90%;
+        margin: 5px auto;
+        padding: 0;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .dropdown-item {
+        padding-left: 30px;
+        white-space: normal;
+    }
+
+    .dropdown-item:hover {
+        background: rgba(242, 101, 34, 0.05);
+        padding-left: 30px;
+        border-left-color: transparent;
+    }
+
+    /* Nested Dropdowns Mobile */
+    .nested-dropdown-container:hover .nested-dropdown {
+        display: block;
+    }
+
+    .nested-dropdown {
+        display: block !important;
+        position: static;
+        box-shadow: none;
+        border: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        background: transparent;
+        animation: none;
+    }
+
+    .nested-dropdown .dropdown-item {
+        padding-left: 45px;
+        background: rgba(0, 0, 0, 0.02);
+        font-size: 13px;
+    }
+
+    .nested-dropdown .dropdown-item:hover {
+        background: rgba(242, 101, 34, 0.05);
+    }
+}
+ 
+.rotate-180 {
+    transform: rotate(180deg) !important;
+}
+
+.rotate-90 {
+    transform: rotate(90deg) !important;
+}

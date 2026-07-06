@@ -1,0 +1,28 @@
+.stats-section {
+    padding: 60px 0;
+    background: #1a1a1a;
+    color: #ffffff;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.stat-number {
+    font-size: 48px;
+    font-weight: 800;
+    color: #F26522;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #ccc;
+}
