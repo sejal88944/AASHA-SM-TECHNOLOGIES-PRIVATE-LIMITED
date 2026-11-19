@@ -1,8 +1,17 @@
 /**
  * Normalizes JSON returned by `/api/apply` for clients that expect `ok` and/or `success`.
- * @param {Record<string, unknown>} json
+ * @param {Record<string, unknown> | null | undefined} json
  */
 export function formatApplyResult(json) {
+  if (!json || typeof json !== 'object') {
+    return {
+      ok: false,
+      success: false,
+      error: 'Invalid server response',
+      message: 'Application submission failed',
+      code: 'BAD_RESPONSE',
+    }
+  }
   const ok = json.ok === true
   if (ok && json.id) {
     return {

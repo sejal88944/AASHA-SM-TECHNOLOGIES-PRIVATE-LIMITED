@@ -34,6 +34,7 @@ Redeploy (or **Redeploy** from the latest deployment) so functions pick up new v
    - `[api/apply] POST begin` — confirms the handler ran.
    - `[mongodb] connect failed` / `[apply] insert failed` — Atlas URI, IP allowlist, or auth.
 3. **GET** `https://smtechsolutions.in/api/apply` — should return JSON with `handler: "fetch+formData"` when the route is live.
+4. If `POST` returns JSON with **`code: "MONGODB_URI_MISSING"`**, add **`MONGODB_URI`** for **Production** in Vercel and redeploy (Atlas connection string).
 
 ## 5. Implementation notes (this repo)
 

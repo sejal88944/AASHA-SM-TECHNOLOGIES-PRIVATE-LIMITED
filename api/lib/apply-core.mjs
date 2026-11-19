@@ -113,6 +113,20 @@ export async function submitApplicationFromMultipart(parsed, env, meta = {}) {
     metaIp: sanitizeShort(ip, 80),
   }
 
+  if (!env.MONGODB_URI?.trim()) {
+    console.error('[apply] MONGODB_URI is not set (Vercel → Settings → Environment Variables → Production)')
+    return {
+      status: 500,
+      json: {
+        ok: false,
+        success: false,
+        error: 'Server configuration error. Please contact support.',
+        message: 'Application submission failed',
+        code: 'MONGODB_URI_MISSING',
+      },
+    }
+  }
+
   try {
     const coll = await getApplicationsCollection(env)
     const result = await coll.insertOne(stripUndefined(doc))
@@ -151,8 +165,11 @@ export async function submitApplicationFromMultipart(parsed, env, meta = {}) {
     return { status: 200, json: { ok: true, id, message: 'Application submitted successfully.' } }
   } catch (e) {
     console.error('[apply] insert failed', e instanceof Error ? e.message : e)
+    console.error('[apply] insert code', e && typeof e === 'object' && 'code' in e ? e.code : undefined)
     console.error('[apply] insert stack', e instanceof Error ? e.stack : '')
     const clientMsg = mongoErrorToClientMessage(e)
+    const missingUri =
+      e instanceof Error && /MONGODB_URI is not configured/i.test(e.message)
     return {
       status: 500,
       json: {
@@ -160,7 +177,7 @@ export async function submitApplicationFromMultipart(parsed, env, meta = {}) {
         success: false,
         error: clientMsg,
         message: 'Application submission failed',
-        code: 'INSERT_FAILED',
+        code: missingUri ? 'MONGODB_URI_MISSING' : 'INSERT_FAILED',
       },
     }
   }
